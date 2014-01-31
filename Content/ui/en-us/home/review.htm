@@ -1,0 +1,316 @@
+﻿<script type="text/javascript">
+    $(document).ready(function () {
+        AppState().Application.Model.RefreshBinding();
+    });
+</script>
+<div>
+    <label id="lbDescription">
+        Please take a moment to review your application before you submit it to ensure that the information you have provided is true and correct.
+    </label>
+</div>
+<div class="card">
+<div class="QuestionBlockWithSeparatorAtBottom">
+    <div class="ReviewList">
+        <span class="ReviewHeaderLine">
+            <span class="obj_PencilIcon" />
+            <label class="BoldLabel">Customer Information</label>
+        </span>
+        <span class="ReviewLine">
+            <label>Name on Account:</label>
+            <label data-bind="text: Response.Enrollment.AccountName" />
+        </span>
+        <span class="ReviewLine">
+            <label>Applicant Name:</label>
+            <label data-bind="text: Response.Enrollment.CustomerFirstName" />
+            <label data-bind="text: Response.Enrollment.CustomerLastName" />
+        </span>
+        <span class="ReviewLine">
+            <label>Phone:</label>
+            <label data-bind="text: Response.Enrollment.HomePhone" />
+        </span>
+        <span class="ReviewLine" data-bind="visible: Response.Enrollment.AltPhone">
+            <label>Alt Phone:</label>
+            <label data-bind="text: Response.Enrollment.AltPhone" />
+        </span>
+        <span class="ReviewLine" data-bind="visible: Response.Enrollment.FaxNumber">
+            <label>Fax:</label>
+            <label data-bind="text: Response.Enrollment.FaxNumber" />
+        </span>
+        <span class="ReviewLine" data-bind="visible: Response.Enrollment.CustomerEmail">
+            <label>Email:</label>
+            <label data-bind="text: Response.Enrollment.CustomerEmail" />
+        </span>
+        <span class="ReviewInsideHeaderLine">
+            <label class="BoldLabel">Installation Address</label>
+        </span>
+        <span class="ReviewLine">
+            <label data-bind="text: Response.ServiceAddress.Street1" />
+            <span data-bind="visible: Response.ServiceAddress.Unit">
+                <label>Unit:</label>
+                <label data-bind="text: Response.ServiceAddress.Unit" />
+            </span>
+        </span>
+        <span class="ReviewLine">
+            <label data-bind="text: Response.ServiceAddress.City" />,
+            <label data-bind="text: Response.ServiceAddress.State" />
+            <label data-bind="text: Response.ServiceAddress.PostalCode" />
+        </span>
+        <span data-bind="visible: !Response.Enrollment.IsMailAddressSameAsInstall()">
+            <span class="ReviewInsideHeaderLine">
+                <label class="BoldLabel">Mailing Address</label>
+            </span>
+            <span class="ReviewLine" data-bind="visible: Response.MailingAddress.IsPOBox()">
+                <label>PO Box</label>
+                <label data-bind="text: Response.MailingAddress.POBox" />
+            </span>
+            <span class="ReviewLine" data-bind="visible: !Response.MailingAddress.IsPOBox()">
+                <label data-bind="text: Response.MailingAddress.Street1" />
+                <span data-bind="visible: Response.MailingAddress.Unit">
+                    <label>Unit:</label>
+                    <label data-bind="text: Response.MailingAddress.Unit" />
+                </span>
+            </span>
+            <span class="ReviewLine" data-bind="visible: Response.MailingAddress.Street2 && !Response.MailingAddress.IsPOBox()">
+                <label data-bind="text: Response.MailingAddress.Street2" />
+            </span>
+            <span class="ReviewLine" data-bind="visible: Response.MailingAddress.Street3 && !Response.MailingAddress.IsPOBox()">
+                <label data-bind="text: Response.MailingAddress.Street3" />
+            </span>
+            <span class="ReviewLine">
+                <label data-bind="text: Response.MailingAddress.City" />,
+                <label data-bind="text: Response.MailingAddress.State" />
+                <label data-bind="text: Response.MailingAddress.PostalCode" />
+            </span>
+            <span class="ReviewLine" data-bind="visible: !Response.MailingAddress.IsPOBox()">
+                <label data-bind="text: Response.MailingAddress.Country" />
+            </span>
+        </span>
+        <span class="ReviewInsideHeaderLine">
+            <label class="BoldLabel">Facility Information</label>
+        </span>
+        <span class="ReviewLine" data-bind="visible: !(Response.Enrollment.IsAirConditioned() == null)">
+            <label>Air Conditioned:</label>
+            <label data-bind="text: Response.Enrollment.IsAirConditioned" />
+        </span>
+        <span class="ReviewLine" data-bind="visible: !(Response.Enrollment.AuditPerformed() == null)">
+            <label>Audit Performed:</label>
+            <label data-bind="text: Response.Enrollment.AuditPerformed" />
+        </span>
+        <span class="ReviewLine" data-bind="visible: !(Response.Enrollment.BenchmarkCompleted() == null)">
+            <label>Benchmark Completed:</label>
+            <label data-bind="text: Response.Enrollment.BenchmarkCompleted" />
+        </span>
+        <span class="ReviewLine" data-bind="visible: Response.Enrollment.BenchmarkScore">
+            <label>Benchmark Score:</label>
+            <label data-bind="text: Response.Enrollment.BenchmarkScore" />
+        </span>
+        <span class="ReviewLine" data-bind="visible: !(Response.Enrollment.BenchmarkExempt() == null)">
+            <label>Benchmark Exempt:</label>
+            <label data-bind="text: Response.Enrollment.BenchmarkExempt" />
+        </span>
+        <span class="ReviewLine" data-bind="visible: Response.Enrollment.BuildingTypeId">
+            <label>Building Type:</label>
+            <label data-bind="text: Program.BuildingTypes != null ? $.grep(Program.BuildingTypes, function (e) { return e.BuildingTypeId == Response.Enrollment.BuildingTypeId(); })[0].BuildingTypeName : ''" />
+        </span>
+        <span class="ReviewLine" data-bind="visible: !(Response.Enrollment.IsExisting() == null)">
+            <label>Construction Type:</label>
+            <label data-bind="text: Response.Enrollment.IsExisting()?'Existing':'New'" />
+        </span>
+        <span class="ReviewLine" data-bind="visible: Response.Enrollment.NumberOfBedrooms">
+            <label>Number of Bedrooms:</label>
+            <label data-bind="text: Response.Enrollment.NumberOfBedrooms" />
+        </span>
+        <span class="ReviewLine" data-bind="visible: Response.Enrollment.NumberOfEmployees">
+            <label>Number of Employees:</label>
+            <label data-bind="text: Response.Enrollment.NumberOfEmployees" />
+        </span>
+        <span class="ReviewLine" data-bind="visible: Response.Enrollment.NumberOfOccupants">
+            <label>Number of Occupants:</label>
+            <label data-bind="text: Response.Enrollment.NumberOfOccupants" />
+        </span>
+        <span class="ReviewLine" data-bind="visible: Response.Enrollment.OccupancyStatusId">
+            <label>Occupancy Status:</label>
+            <label data-bind="if: Response.Enrollment.OccupancyStatusId">
+                <span data-bind="text: Program.OccupancyStatuses != null ? $.grep(Program.OccupancyStatuses, function (e) { return e.OccupancyStatusId == Response.Enrollment.OccupancyStatusId(); })[0].OccupancyStatus : ''" />
+            </label>
+        </span>
+        <span class="ReviewLine" data-bind="visible: Response.Enrollment.ParkName">
+            <label>Park Name:</label>
+            <label data-bind="text: Response.Enrollment.ParkName" />
+        </span>
+        <span class="ReviewLine" data-bind="visible: Response.Enrollment.ProjectTypeId">
+            <label>Project Type:</label>
+            <label data-bind="text: Program.ProjectTypes != null ? $.grep(Program.ProjectTypes, function (e) { return e.ProjectTypeId == Response.Enrollment.ProjectTypeId(); })[0].ProjectTypeName : ''" />
+        </span>
+        <span class="ReviewLine" data-bind="visible: Response.Enrollment.TotalSqFtLivingSpace">
+            <label>Square Footage:</label>
+            <label data-bind="text: Response.Enrollment.TotalSqFtLivingSpace" />
+        </span>
+        <span class="ReviewLine" data-bind="visible: Response.Enrollment.WeeklyHoursOfOperation">
+            <label>Weekly Hours of Operation:</label>
+            <label data-bind="text: Response.Enrollment.WeeklyHoursOfOperation" />
+        </span>
+        <span class="ReviewLine" data-bind="visible: Response.Enrollment.YearBuilt">
+            <label>Year Built:</label>
+            <label data-bind="text: Response.Enrollment.YearBuilt" />
+        </span>
+
+        <span class="ReviewHeaderLine">
+            <span class="obj_PencilIcon" />
+            <label class="BoldLabel">Installer Information</label>
+        </span>
+        <span class="ReviewLine">
+            <label data-bind="text: Response.Contractor.ContractorName" />
+            -
+            <label data-bind="text: Response.Contractor.ContractorEmployee.FullName" />
+        </span>
+
+        <span class="ReviewHeaderLine">
+            <span class="obj_PencilIcon" />
+            <label class="BoldLabel">Payee Information</label>
+        </span>
+        <span class="ReviewLine">
+            <label>Payee:</label>
+            <label data-bind="if: Response.Enrollment.PaymentToId">
+                <span data-bind="text: Program.PaymentToTypes != null ? $.grep(Program.PaymentToTypes, function (e) { return e.PaymentToId == Response.Enrollment.PaymentToId(); })[0].Label : ''" />
+            </label>
+        </span>
+        <span class="ReviewLine">
+            <label>Name:</label>
+            <label data-bind="text: Response.Enrollment.PayeeName"/>
+        </span>
+        <span class="ReviewLine">
+            <label>Tax Status:</label>
+            <label data-bind="if: Response.Enrollment.PayeeTaxStatusId">
+                <span data-bind="text: Program.TaxStatusTypes != null ? $.grep(Program.TaxStatusTypes, function (e) { return e.TaxStatusId == Response.Enrollment.PayeeTaxStatusId(); })[0].Description : ''" />
+            </label>
+        </span>
+        <span class="ReviewLine">
+            <label>Tax Id:</label>
+            <label data-bind="text: Response.Enrollment.PayeeTaxIdSSN"/>
+        </span>
+        <span class="ReviewInsideHeaderLine">
+            <label class="BoldLabel">Mailing Address</label>
+        </span>
+        <span data-bind="with: Response.Enrollment.PayeeAddress">
+            <span class="ReviewLine">
+                <span data-bind="visible: IsPOBox()">
+                    <label>PO Box</label>
+                    <label data-bind="text: POBox" />
+                </span>
+                <span data-bind="visible: !IsPOBox()">
+                    <label data-bind="text: Street1" />
+                    <span data-bind="visible: Unit">
+                        <label>Unit:</label>
+                        <label data-bind="text: Unit" />
+                    </span>
+                </span>
+            </span>
+            <span class="ReviewLine">
+                <label data-bind="text: City" />,
+                <label data-bind="text: State" />
+                <label data-bind="text: PostalCode" />
+            </span>
+        </span>
+
+        <span class="ReviewHeaderLine">
+            <span class="obj_PencilIcon" />
+            <label class="BoldLabel">Equipment Information</label>
+        </span>
+        <div class="GroupedReview" data-bind="foreach: Response.EnrollmentMeasures">
+            <span class="Group">
+                <span class="ReviewLine">
+                    <label class="ItalicLabel" data-bind="text: MeasureFullName"/>
+                </span>
+                <span class="ReviewLine">
+                    <label>Quantity:</label>
+                    <label data-bind="text: PlannedMeasureQty" />
+                </span>
+                <span data-bind="foreach: Properties">
+                    <span class="ReviewLine">
+                        <label data-bind="text: PropertyType" />:
+                        <!-- ko if: ControlType === "textbox" -->
+                            <label data-bind="text: InstallationPropertyValue" />
+                        <!-- /ko -->
+                        <!-- ko if: ControlType === "dropdownlist" -->
+                            <label data-bind="text: SelectedInstallationPropertyItem.text" />
+                        <!-- /ko -->
+                        <!-- ko if: ControlType === "date" -->
+                            <label data-bind="text: InstallationPropertyValue" />
+                        <!-- /ko -->
+                        <!-- ko if: ControlType === "checkbox" -->
+                            <label data-bind="text: InstallationPropertyValue" />
+                        <!-- /ko -->
+                        <!-- ko if: ControlType === "checkboxgroup" -->
+                            <label data-bind="text: SelectedInstallationPropertyItems().map(function(item) { return item.text; }).join(', ')" />
+                        <!-- /ko -->
+                        <!-- ko if: InstallationPropertyControlTypeId() === 6 -->
+                            What control is this?
+                            <label />
+                        <!-- /ko -->
+                        <!-- ko if: ControlType === "numericvalue" -->
+                            <label data-bind="text: InstallationPropertyValue" />
+                        <!-- /ko -->
+                        <!-- ko if: ControlType === "formula" -->
+                            <label data-bind="text: CalculatedPropertyValue" />
+                        <!-- /ko -->
+                    </span>
+                </span>
+            </span>
+        </div>
+        <span class="ReviewInsideHeaderLine">
+            <label class="BoldLabel">Incentives</label>
+        </span>
+        <span class="ReviewLine">
+            <label>Amount:</label>
+            <label data-bind="text: AppState().Application.Model.Response.EnrollmentMeasures.Amount" />
+        </span>
+
+        <span class="ReviewHeaderLine">
+            <span class="obj_PencilIcon" />
+            <label class="BoldLabel">Uploaded Documents</label>
+        </span>
+        <div class="GroupedReview" data-bind="foreach: Response.Files">
+            <span class="Group">
+                <span class="ReviewLine">
+                    <label data-bind="text: DocumentTypeName" />
+                </span>
+                <span class="ReviewLine">
+                    <label data-bind="text: Description" />
+                </span>
+            </span>
+        </div>
+    </div>
+</div>
+<div class="QuestionBlockWithSeparatorAtBottom">
+    <div>
+        <label>
+            <b>Note:</b> A confirmation email will be sent to your email address. Please indicate any additional email addresses you would like to have this confirmation sent to.
+        </label>
+    </div>
+    <div>
+        <ul class="FormFields">
+            <li>
+                <label>Email:</label>
+                <label data-bind="text: Response.Enrollment.CustomerEmail" />
+            </li>
+        </ul>
+        <ul class="FormFields form-horizontal" data-bind="foreach: Response.Enrollment.AdditionalEmailsList">
+            <li class="form-group">
+                <label class="control-label col-sm-2" data-bind="text: 'Email ' + ($index() + 1) + ':'"></label>
+                <span class="col-sm-6">
+                    <input type="text" class="form-control" data-bind="value: value" />
+                </span>
+                <span class="Error" data-bind="visible: !value.IsValid()">
+                    <span class="tooltip">
+                        <span class="ErrorIcon" />
+                        <span class="TooltipText" data-bind="foreach: value.ValidationMessages">
+                            <span data-bind="text: $data" /><br />
+                        </span>
+                    </span>
+                </span>
+            </li>
+        </ul>
+    </div>
+</div>
+</div>

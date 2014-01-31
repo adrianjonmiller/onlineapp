@@ -1,0 +1,32 @@
+﻿<script type="text/javascript">
+    $(document).ready(function () {
+        AppState().Application.Model.Steps.Next.BeforeClick = function (wasSuccessful) {
+            var isValid = AppState().Application.Model.Response.IsValidTermsConditions();
+            console.log("Is valid terms and conditions: " + isValid);
+            wasSuccessful(isValid);
+        };
+        AppState().Application.Model.RefreshBinding();
+    });
+</script>
+<div class="card">
+    <label id="lbDescription" class="BoldLabel">
+        Terms and Conditions
+    </label>
+    <div class="TermsAndConditions">
+        <span data-bind="html: Program.TermsAndConditions"></span>
+    </div>
+    <div>
+        <input type="checkbox" data-bind="checked: Response.Enrollment.AgreedToTerms" />
+        <label>
+            I Agree to the Terms and Conditions of this program.
+        </label>
+        <span class="Error" data-bind="visible: !Response.Enrollment.AgreedToTerms.IsValid()">
+            <span class="tooltip">
+                <span class="ErrorIcon" />
+                <span class="TooltipText" data-bind="foreach: Response.Enrollment.AgreedToTerms.ValidationMessages">
+                    <span data-bind="text: $data" /><br />
+                </span>
+            </span>
+        </span>
+    </div>
+</div>

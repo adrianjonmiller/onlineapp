@@ -1,0 +1,17 @@
+body {
+  background-color: #fafafa; }
+
+.card {
+  padding: 18px;
+  background: #fff;
+  overflow: visible;
+  border: solid lightgray thin;
+  border-radius: 18px; }
+
+.FormFields {
+  list-style: none;
+  margin-left: 0;
+  padding-left: 0; }
+  .FormFields > li {
+    list-style: none;
+    margin-left: 0; }

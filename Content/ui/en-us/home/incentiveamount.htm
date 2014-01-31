@@ -1,0 +1,23 @@
+﻿<script type="text/javascript">
+    $(document).ready(function () {
+        AppState().Application.Model.Steps.Next.BeforeClick = function (wasSuccessful) {
+            var isValid = AppState().Application.Model.Response.IsValidIncentiveAmount();
+            console.log("Is valid incentive amount: " + isValid);
+            return wasSuccessful(isValid);
+        };
+        AppState().Application.Model.RefreshBinding();
+        AppState().Application.Model.Response.EnrollmentMeasures.Calculate();
+    });
+</script>
+<div>
+    <div id="divIncentiveAmount" data-bind="visible: AppState().Application.Model.Response.EnrollmentMeasures.Calculated()">
+        You have applied for <label id="lblIncentiveAmount" data-bind="text: AppState().Application.Model.Response.EnrollmentMeasures.Amount">$$UNBOUND</label>.
+        <div id="InsufficientFunds" class="InsufficientFundsMessage" data-bind="visible: !AppState().Application.Model.Response.EnrollmentMeasures.AmountAvailable()">
+            <label id="lblInsufficientFundsMessage">
+                Insufficient Funds Message
+            </label>
+        </div>
+    </div><div id="divCalculatingAmounts" data-bind="visible: !AppState().Application.Model.Response.EnrollmentMeasures.Calculated()">
+        Please wait while we calculate your totals...
+    </div>
+</div>

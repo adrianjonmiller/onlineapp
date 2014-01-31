@@ -1,0 +1,171 @@
+﻿<script type="text/javascript">
+    $(document).ready(function () {
+        AppState().Application.Model.Steps.Next.BeforeClick = function (wasSuccessful) {
+            var isValid = true; //AppState().Application.Model.Response.IsValidEquipmentInformation();
+            console.log("Is valid upload documents: " + isValid);
+            return wasSuccessful(isValid);
+        };
+        AppState().Application.Model.RefreshBinding();
+        AppState().Application.Model.SelectedFile.DialogQuery("#dlgAddDocument");
+
+        var AJAXUpload = false;
+        try
+        {
+            var fd = new FormData();
+            AJAXUpload = true;
+        } catch (ex) {
+            console.log("HTML 5 AJAX Upload not supported. Falling back to iFrame.");
+            AJAXUpload = false;
+        }
+
+        if (AJAXUpload) {
+            $("#dlgAddDocument").dialog({
+                autoOpen: false,
+                resizable: false,
+                modal: true,
+                width: 500,
+                height: 400,
+                open: function () {
+                    var asdf = $("#fileInput");
+                    asdf.wrap("<form>").closest("form").get(0).reset();
+                    asdf.unwrap();
+                },
+                buttons: {
+                    Upload: function () {
+                        AppState().Application.Model.SelectedFile.Upload();
+                    },
+                    Cancel: function () {
+                        if (!AppState().Application.Model.SelectedFile.Uploading()) {
+                            AppState().Application.Model.SelectedFile.Select(null);
+                            $(this).dialog("close");
+                        }
+                    }
+                }
+            });
+
+            $(".obj_FileToUpload").change(function () { AppState().Application.Model.SelectedFile.Select($(".obj_FileToUpload")[0].files[0]); });
+            $("#divHTML5Upload").show();
+        } else {
+            $("#dlgAddDocument").dialog({
+                autoOpen: false,
+                resizable: false,
+                modal: true,
+                width: 500,
+                height: 400,
+                open: function () {
+                    $("#ifUpload").attr("src", "./Content/ui/en-us/upload/document.htm");
+                },
+                buttons: {}
+            });
+
+            $("#ifUpload").attr("src", "./Content/ui/en-us/upload/document.htm");
+            $("#ifUpload").show();
+        }
+
+        $("button#btnAddDocument").button({
+            icons: {
+                primary: "ui-icon-plus"
+            },
+            text: false
+        }).click(function () {
+            $("#dlgAddDocument").dialog("open");
+        });
+    });
+</script>
+<div>
+    <label id="lbDescription">
+        Please attach any proof of purchase or project worksheets that are required according to the program terms to help us expedite the processing of your application.
+    </label>
+</div>
+<div class="QuestionBlockWithSeparatorAtBottom card">
+    <ul class="Documents" data-bind="foreach: Response.Files">
+        <li class="Panel" hidden>
+            <div class="PanelTopLine">
+                <label class="BoldLabel" data-bind="text: DocumentTypeName">Unbound - Document Type</label>
+                <span class="obj_DeleteButton PanelDeleteButton" data-bind="click: $root.Response.Files.RemoveFile" />
+            </div>
+            <ul>
+                <li class="DocumentName">
+                    <label>
+                        Filename:
+                    </label>
+                    <label data-bind="text: Name">
+                        Unbound - File Name
+                    </label>
+                </li>
+                <li>
+                    <label class="DocumentDescription" data-bind="text: Description">
+                        Unbound - Document Description
+                    </label>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <div class="AddButton">
+        <button id="btnAddDocument">Add Document</button>
+        Add Document
+    </div>
+</div>
+<div id="dlgAddDocument" class="Dialog" title="Add Document">
+    <div id="divHTML5Upload" style="display: none;">
+        <div class="SectionWithLineAtBottom">
+            <span class="obj_DocumentIcon" />
+            <span class="Title">Upload a Document</span>
+            <div>
+                Choose a file to upload. The uploader can only upload one file at a time and the file size cannot exceed 10 MB.
+            </div>
+        </div>
+        <div>
+            <span class="ItemTitle">Document Type</span>
+            <div class="Field">
+                <select name="DocumentTypeId" data-bind="options: Program.DocumentTypes, optionsValue: 'DocumentTypeId', optionsText: 'DocumentTypeName', value: SelectedFile.DocumentTypeId"></select>
+                <div class="Error" data-bind="visible: !SelectedFile.DocumentTypeId.IsValid()">
+                    <span class="tooltip">
+                        <span class="ErrorIcon" />
+                        <span class="TooltipText" data-bind="foreach: SelectedFile.DocumentTypeId.ValidationMessages">
+                            <span data-bind="text: $data" /><br />
+                        </span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <span class="ItemTitle">Select a File to Upload</span>
+            <div class="Field">
+                <input type="file" id="fileInput" name="fileToUpload" class="obj_FileToUpload" />
+                <div class="Error" data-bind="visible: !SelectedFile.Current.IsValid()">
+                    <span class="tooltip">
+                        <span class="ErrorIcon" />
+                        <span class="TooltipText" data-bind="foreach: SelectedFile.Current.ValidationMessages">
+                            <span data-bind="text: $data" /><br />
+                        </span>
+                    </span>
+                </div>
+                <div class="Error" data-bind="visible: !SelectedFile.UploadFailed.IsValid()">
+                    <span class="tooltip">
+                        <span class="ErrorIcon" />
+                        <span class="TooltipText" data-bind="foreach: SelectedFile.UploadFailed.ValidationMessages">
+                            <span data-bind="text: $data" /><br />
+                        </span>
+                    </span>
+                </div>
+                <div class="Error" data-bind="visible: !SelectedFile.UploadCanceled.IsValid()">
+                    <span class="tooltip">
+                        <span class="ErrorIcon" />
+                        <span class="TooltipText" data-bind="foreach: SelectedFile.UploadCanceled.ValidationMessages">
+                            <span data-bind="text: $data" /><br />
+                        </span>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div data-bind="text: SelectedFile.Size"></div>
+        <div>
+            <span class="ItemTitle">Description / Comments</span>
+            <div class="Field">
+                <textarea class="Description" rows="3" data-bind="value: SelectedFile.Description, enable: SelectedFile.Uploading() != true"></textarea>
+            </div>
+        </div>
+    </div>
+    <iframe id="ifUpload" style="width: 450px; height: 300px; border: 0px;" scrolling="no" style="overflow: hidden; display: none;"></iframe>
+</div>

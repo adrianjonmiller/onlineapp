@@ -1,0 +1,13 @@
+﻿<script type="text/javascript">
+    $(document).ready(function () {
+        AppState().Application.Model.RefreshBinding();
+        AppState().Application.Model.Program.ShowNav(false);
+    });
+</script>
+<div style="display: inline-block;">
+    <div style="float: left; position: relative;">
+        <img src="./Content/images/Out-Of-Money.jpg" />
+        <span class="RoundedBox" data-bind="html: Program.Settings.InsufficientFundsMessage">
+        </span>
+    </div>
+</div>

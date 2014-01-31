@@ -1,0 +1,17 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <script src="/Scripts/jquery-1.7.1.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            window.parent.document.AppState().Application.Model.Response.Files.AddFile(JSON.parse('{0}'));
+            console.log("Closing dialog.");
+            window.parent.jQuery(window.parent.document.AppState().Application.Model.SelectedFile.DialogQuery()).dialog("close");
+        });
+    </script>
+</head>
+<body>
+    Upload Successful! You may now close this dialog.
+</body>
+</html>

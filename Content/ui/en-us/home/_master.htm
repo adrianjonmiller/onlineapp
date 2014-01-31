@@ -1,0 +1,158 @@
+﻿<script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+        if (AppState().hashInfo.nav != "") {
+            AppState().routes.loading.clear();
+            document.location = "#?" + AppState().hashInfo.datastr;
+        }
+		AJAXLoadHTML("./Content/spoof/program-config.htm", null, function (msg) {
+			msg = JSON.parse(msg);
+            AppState().Application = {
+                Model: configureModel(msg),
+            };
+
+            $("#SiteStyleSheet").attr("href", "Method/GetStyleSheet?programId=" + AppState().data.vars["programId"]);
+
+            if (AppState().Application.Model.Program.FundsAvailable) {
+                AppState().Application.Model.Steps.CurrentStep(0);
+            } else {
+                AppState().routes.loading.clear();
+                document.location = "#home/insufficientfunds?" + AppState().hashInfo.datastr;
+            }
+
+            $("header, nav, footer").each(function() {
+                ko.applyBindings(AppState().Application.Model, this);
+            });
+
+            var lastTildeHit = null;
+
+            // $(document).keydown(function (evt) {
+            //     if (evt.keyCode == 192) {
+            //         var date = new Date();
+            //         var currentTildeHit = date.getTime();
+            //         if (lastTildeHit == null || (currentTildeHit - lastTildeHit) > 1000) {
+            //             lastTildeHit = currentTildeHit;
+            //         } else {
+            //             lastTildeHit = null;
+            //             var debug = AppState().Application.Model.Debug();
+            //             AppState().Application.Model.Debug(!debug);
+            //         }
+            //     };
+            // });
+
+            var debug = AppState().Application.Model.Debug();
+                        AppState().Application.Model.Debug(!debug);
+
+            // Source: http://stackoverflow.com/questions/1119289
+            var confirmOnPageExit = function (e) {
+                // If we haven't been passed the event get the window.event
+                e = e || window.event;
+
+                var message = 'Are you sure you wish to leave this page? Your application will be lost.';
+
+                // For IE6-8 and Firefox prior to version 4
+                if (e) {
+                    e.returnValue = message;
+                }
+
+                // For Chrome, Safari, IE8+ and Opera 12+
+                return message;
+            };
+
+            AppState().routes.loading.resume();
+            window.onbeforeunload = confirmOnPageExit;
+        }, {
+            clientExceptionCallBack: function (msg) {
+                console.log("/Method/GetProgramInfo/ client exception.");
+
+                var PROGRAM_NOT_CONFIGURED = 1;
+                var PROGRAM_YEAR_NOT_CONFIGURED = 2;
+                var ProgramNotConfigured = msg.ClientExceptions.filter(function (ex) { return ex.Number == PROGRAM_NOT_CONFIGURED; }).length > 0;
+                var ProgramYearNotConfigured = msg.ClientExceptions.filter(function (ex) { return ex.Number == PROGRAM_YEAR_NOT_CONFIGURED }).length > 0;
+
+                var model = {
+                    Program: {
+                            ShowHeader: false,
+                            ShowNav: false,
+                            Name: null,
+                            },
+                    Steps: [],
+                    RefreshBinding: function () {
+                        try {
+                            ko.cleanNode($("section#content")[0]);
+                            ko.applyBindings(AppState().Application.Model, $("section#content")[0]);
+                        } catch (ex) {
+                            console.error("Failed to refresh bindings: " + ex.toString());
+                        }
+                    }
+                };
+
+                model.Steps.Previous = { Show: false, Click: null };
+                model.Steps.Next = { Show: false, Click: null };
+                model.Steps.Submit = { Show: false, Click: null };
+                model.Steps.Debug = { Show: false, Click: null };
+                model.Steps.StatusCheck = { Show: false, Click: null };
+
+                AppState().Application = {
+                    Model: model
+                };
+
+                $("header, nav, footer").each(function () {
+                    ko.applyBindings(AppState().Application.Model, this);
+                });
+
+                AppState().routes.loading.clear();
+                document.location = "#home/programnotconfigured?" + AppState().hashInfo.datastr;
+                AppState().routes.loading.resume();
+            }
+        });
+    });
+</script>
+
+<div id="OnlineApplicationForm">
+    <header data-bind="visible: Program.ShowHeader">
+        <h1 data-bind="text: Program.Settings == null ? '' : Program.Settings.FriendlyProgramName"></h1>
+        <h2 data-bind="text: Steps.CurrentStepTitle">UNBOUND</h2>
+    </header>
+    <div class="row">
+        <nav data-bind="visible: Program.ShowNav" class="col-md-4">
+            <ul data-bind="foreach: Steps" class="nav nav-pills nav-stacked">
+                <li>
+                    <!-- ko if: CanJump() == false -->
+                        <span data-bind="text: Title"></span>
+                    <!-- /ko -->
+                    <!-- ko if: CanJump() == true -->
+                        <a data-bind="attr: { href: URL }, text: Title, click: function () { return AppState().Application.Model.Steps.CurrentStep($index()); }"></a>
+                    <!-- /ko -->
+                </li>
+            </ul>
+        </nav>
+        <section id="content" class="col-md-8">
+            <div>
+                <div id="__workspace.home" class="workspace" style="min-height: 300px;"></div>
+            </div>
+            <div id="dialog"></div>
+        </section>
+    </div>
+    <footer>
+        <input type="button" class="btn btn-primary" value="<< Back" data-bind="
+            visible: Steps.Previous.Show,
+            click: Steps.Previous.Click" style="display: none;" />
+        <input type="button" class="btn btn-primary" value="Next >>" data-bind="
+            visible: Steps.Next.Show,
+            click: Steps.Next.Click" style="display: none;" />
+        <input type="button" class="btn btn-primary" value="Submit" data-bind="
+            visible: Steps.Submit.Show,
+            click: Steps.Submit.Click" style="display: none;" />
+        <input type="button" class="btn btn-primary" value="Debug" data-bind="
+            visible: Steps.Debug.Show,
+            click: Steps.Debug.Click" style="display: none;" />
+        <input type="button" class="btn btn-primary" value="Status Check" data-bind="
+            visible: Steps.StatusCheck.Show,
+            click: Steps.StatusCheck.Click" style="display: none;" />
+    </footer>
+    <div id="dlgDebug" style="display: none;">
+        <textarea rows="20" cols="80" class="obj_txtData">
+
+        </textarea>
+    </div>
+</div>

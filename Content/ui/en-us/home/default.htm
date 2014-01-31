@@ -1,0 +1,78 @@
+﻿<script type="text/javascript">
+    $(document).ready(function () {
+        AppState().Application.Model.Steps.Next.BeforeClick = function (wasSuccessful) {
+            AppState().Application.Model.Response.IsValidGettingStarted(true, wasSuccessful);
+        };
+        AppState().Application.Model.RefreshBinding();
+    });
+</script>
+<form class="GettingStarted card" role="form">
+    <div class="form-group">
+        <h3 data-bind="html: Program.WelcomeMessage">This is not the welcome message.</h3>
+    </div>
+    <div class="form-group">
+        <span>Indicate who is completing this application:</span>
+        <div class="Error" data-bind="visible: !Response.Enrollment.EnrollmentWhoIsApplyingId.IsValid()">
+            <span class="tooltip">
+                <span class="ErrorIcon" />
+                <span class="TooltipText" data-bind="foreach: Response.Enrollment.EnrollmentWhoIsApplyingId.ValidationMessages">
+                    <span data-bind="text: $data" /><br />
+                </span>
+            </span>
+        </div>
+        <ul class="answers list-unstyled" data-bind="foreach: Program.EnrollmentWhoIsApplying">
+            <li class="radio">
+              <label>
+                <input type="radio" name="rbWhoIsApplying" data-bind="checked: $root.Response.Enrollment.EnrollmentWhoIsApplyingId, value: EnrollmentWhoIsApplyingId">
+                <span data-bind="text: Description">Unbound</span>
+              </label>
+            </li>
+        </ul>
+    </div>
+    <div class="AccountNumber form-group">
+      <span for="txtAccountNumber"></span>
+      <div>
+        <input type="text" style="width: 300px;" class="form-control" id="txtAccountNumber" placeholder="Account Number (No spaces or dashes)" data-bind="value: Response.Enrollment.ServiceAccountNo" />
+      </div>
+      <div class="Error" data-bind="visible: Response.Enrollment.ServiceAccountNo.IsValid() == false">
+        <span class="tooltip">
+          <span class="ErrorIcon"></span>
+          <span class="TooltipText" data-bind="foreach: Response.Enrollment.ServiceAccountNo.ValidationMessages"></span>
+          <span data-bind="text: $data" ></span><br />
+          </span>
+        </span>
+      </div>
+    </div>
+    <div class="form-group">
+      <ul id="PrequalificationQuestions" class="obj_Questions questions list-unstyled" data-bind="foreach: Program.PrequalificationQuestions">
+          <li data-bind="attr: { 'data-question': Label }">
+              <label data-bind="text: Label">Testing?</label>
+              <div class="Error" data-bind="visible: !AnswerIsValid()">
+                  <span class="tooltip">
+                      <span class="ErrorIcon" />
+                      <span class="TooltipText">
+                          <span data-bind="text: InvalidMessage()" /><br />
+                      </span>
+                  </span>
+              </div>
+              <ul class="obj_Answers answers list-unstyled" data-bind="foreach: Answers">
+                  <li data-template="true" class="radio">
+                    <label>
+                      <input type="radio" data-bind="
+                          value: AnswerId,
+                          attr: {
+                              'data-question-id': QuestionId,
+                              'data-answer-id': AnswerId,
+                              'data-is-valid': IsValidAnswer,
+                              'data-invalid-text': InvalidAnswerText,
+                              'name': 'Question' + QuestionId
+                          },
+                          checked: CheckedValue" />
+                        <span data-bind="text: Label"></span>
+                      </label>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+    </div>
+</form>

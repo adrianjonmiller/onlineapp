@@ -1,0 +1,22 @@
+﻿<script type="text/javascript">
+    $(document).ready(function () {
+        AppState().Application.Model.RefreshBinding();
+    });
+</script>
+<div class="card">
+<form role="form">
+    <span class="ConfirmationPicture" />
+    <h3>Congratulations!</h3>
+    <div class="Confirmation">
+        <label>
+            Your confirmation number is:
+        </label>
+        <label data-bind="text: Response.Enrollment.EnrollmentNumber">Unbound</label>
+    </div>
+    <div class="Confirmation" data-bind="html: Program.ConfirmationMessage" />
+    <div class="Confirmation">
+        <span class="obj_PrintIcon" />
+        <a href="#home/print">Print a summary of your application</a>
+    </div>
+</form>
+</div>

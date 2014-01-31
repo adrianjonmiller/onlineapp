@@ -1,0 +1,55 @@
+(function() {
+  this.ecoTemplates || (this.ecoTemplates = {});
+  this.ecoTemplates["definitions.html"] = function(__obj) {
+    if (!__obj) __obj = {};
+    var __out = [], __capture = function(callback) {
+      var out = __out, result;
+      __out = [];
+      callback.call(this);
+      result = __out.join('');
+      __out = out;
+      return __safe(result);
+    }, __sanitize = function(value) {
+      if (value && value.ecoSafe) {
+        return value;
+      } else if (typeof value !== 'undefined' && value != null) {
+        return __escape(value);
+      } else {
+        return '';
+      }
+    }, __safe, __objSafe = __obj.safe, __escape = __obj.escape;
+    __safe = __obj.safe = function(value) {
+      if (value && value.ecoSafe) {
+        return value;
+      } else {
+        if (!(typeof value !== 'undefined' && value != null)) value = '';
+        var result = new String(value);
+        result.ecoSafe = true;
+        return result;
+      }
+    };
+    if (!__escape) {
+      __escape = __obj.escape = function(value) {
+        return ('' + value)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;');
+      };
+    }
+    (function() {
+      (function() {
+      
+        __out.push('  ---\nlayout      : \'default\'\ncss         : \'guide\'\n\ntitle       : \'Definitions\'\ndescription : \'Definitions provide a re-usable format for sharing an interface design\'\ntype        : \'UI Introduction\'\n---\n<script src="/javascript/intro.js"></script>\n\n');
+      
+        __out.push(this.partial('header'));
+      
+        __out.push('\n<div class="main container">\n  <div class="peek">\n    <div class="ui vertical pointing secondary menu">\n      <a class="active item">Definitions</a>\n      <a class="item">Types</a>\n    </div>\n  </div>\n\n  <h2 class="ui dividing header">Defining Definitions</h2>\n\n  <p>Definitions in semantic are groups of css, fonts, images, and javascript which make up a single element. Unlike other javascript libraries, semantic UI elements are stand-alone and only require their own assets to function correctly.</p>\n\n  <h3 class="ui header">Definition Types</h3>\n  <p>Semantic has five different ui definitions. These are useful patterns for describing re-usable parts of a website.</p>\n  <table class="ui celled table segment">\n    <tr>\n      <td class="four wide"><b>UI Element</b></td>\n      <td>A basic building block of a website, exists alone or in homogenous groups</td>\n    </tr>\n    <tr>\n      <td><b>UI Collection</b></td>\n      <td>A heterogeneous group of several elements which can usually be found together.</td>\n    </tr>\n    <tr>\n      <td><b>UI View</b></td>\n      <td>A way to present common website content like comments, activity feeds</td>\n    </tr>\n    <tr>\n      <td><b>UI Module</b></td>\n      <td>An element where its behavior is an essential part of its definition</td>\n    </tr>\n    <tr>\n      <td><b>UI Behavior</b></td>\n      <td>A set of free-standing actions not specifically tied to an element</td>\n    </tr>\n  </table>\n\n  <h3 class="ui dividing header">Definition Sections</h2>\n  <p>All UI components of a single type are defined similarly.</p>\n  <table class="ui celled sortable definition table segment">\n    <tr>\n      <td class="three wide">All UI</td>\n      <td>\n        <div class="ui divided relaxed list">\n          <div class="item">\n            <div class="header">Types</div>\n            <div class="description">Defines mutually exclusive types which each may have their own html</div>\n          </div>\n          <div class="item">\n            <div class="header">States</div>\n            <div class="description">Defines element states like disabled, hovered, pressed down</div>\n          </div>\n          <div class="item">\n            <div class="header">Variations</div>\n            <div class="description">Defines changes to an element which are not mutually exclusive and can be used together</div>\n          </div>\n        </div>\n      </td>\n    </tr>\n    <tr>\n      <td>Elements</td>\n      <td>\n        <div class="ui divided relaxed list">\n          <div class="item">\n            <div class="header">Group</div>\n            <div class="description">An element can optionally define how attributes can be shared across a group</div>\n          </div>\n          <div class="item">\n            <div class="header">\n              <a href="/elements/button.html"><i class="book icon"></i>UI Button</a>\n            </div>\n          </div>\n        </div>\n      </td>\n    </tr>\n    <tr>\n      <td>Collections</td>\n      <td>\n        <div class="ui divided relaxed list">\n          <div class="item">\n            <div class="header">Content</div>\n            <div class="description">A collection can define elements which might be found inside</div>\n          </div>\n          <div class="item">\n            <div class="header">States</div>\n            <div class="description">A collection may define states for content elements or itself</div>\n          </div>\n          <div class="item">\n            <div class="header">Variations</div>\n            <div class="description">A collection may define variations for content elements or itself</div>\n          </div>\n          <div class="item">\n            <div class="header">\n              <a href="/collections/form.html"><i class="book icon"></i>UI Form</a>\n            </div>\n          </div>\n        </div>\n      </td>\n    </tr>\n    <tr>\n      <td>Views</td>\n      <td>\n        <div class="ui divided relaxed list">\n          <div class="item">\n            <div class="header">Content</div>\n            <div class="description">A view may define elements which can exist inside of the view</div>\n          </div>\n          <div class="item">\n            <div class="header">States</div>\n            <div class="description">A view may define states for content elements or itself</div>\n          </div>\n          <div class="item">\n            <div class="header">Variations</div>\n            <div class="description">A view may define variations for a content elements or itself</div>\n          </div>\n          <div class="item">\n            <div class="header">\n              <a href="/views/item.html"><i class="book icon"></i>UI Item</a>\n            </div>\n          </div>\n        </div>\n      </td>\n    </tr>\n    <tr>\n      <td>Modules & Behaviors</td>\n      <td>\n        <div class="ui divided relaxed list">\n          <div class="item">\n            <div class="header">Behavior</div>\n            <div class="description">A module will define a set of <a href="/module.html#/behavior">behaviors</a> which can be used as an API</div>\n          </div>\n          <div class="item">\n            <div class="header">Settings</div>\n            <div class="description">A <a href="/module.html#/settings">settings object</a> which can alter the default behavior when instantiating a module</div>\n          </div>\n          <div class="item">\n            <div class="header">Examples</div>\n            <div class="description">A list of examples to showcase the variations in behavior of a module</div>\n          </div>\n          <div class="item">\n            <div class="header">\n              <a href="/modules/dropdown.html"><i class="book icon"></i>UI Dropdown</a>\n            </div>\n          </div>\n        </div>\n      </td>\n    </tr>\n    </tr>\n  </table>\n  <h2 class="ui dividing header">Types of Definitions</h2>\n\n  <h3 class="ui dividing header">UI Elements</h3>\n\n  <p>UI Elements are page elements which are indivisible. This can be thought of as similar in definition as an "element" in chemistry.</p>\n\n  <p>UI elements can have plural definitions when they are known to exist together in groups. Plural variations allow you to only specify qualities once, allowing them to be inferred across all members of a group.</p>\n\n  <div class="code" data-type="html" data-label="true">\n    <div class="large ui buttons">\n      <div class="ui button">Cancel</div>\n      <div class="ui button">Continue</div>\n    </div>\n  </div>\n\n  <h3 class="ui header">Examples of UI elements:</h3>\n  <table class="ui celled table">\n    <tr>\n      <td class="two wide"><b>Button</b></td>\n      <td>\n        <div class="ui labeled teal icon button"><i class="globe icon"></i>Button</div>\n      </td>\n    </tr>\n    <tr>\n      <td><b>Label</b></td>\n      <td>\n        <div class="ui label">label</div>\n      </td>\n    </tr>\n    <tr>\n      <td><b>Input</b></td>\n      <td>\n        <div class="ui icon input">\n          <input value="input">\n          <i class="search icon"></i>\n        </div>\n      </td>\n    </tr>\n    <tr>\n      <td><b>Loader</b></td>\n      <td>\n        <div class="ui active inline loader"></div>\n      </td>\n    </tr>\n    <tr>\n      <td><b>Segment</b></td>\n      <td>\n        <div class="ui stacked segment">Segment</div>\n      </td>\n    </tr>\n  </table>\n\n  <h3 class="ui dividing header">UI Collections</h3>\n\n  <p>UI Collections are groups of heterogeneous page elements which are usually found together. Carrying the chemistry metaphor, these can be thought of as molecules.</p>\n\n  <p>UI collections have a definition of elements that exist, or could exist inside of them. They do not usually require all elements to be found, but they describe a list of the "usual suspects". Unlike elements definitions, collections are not typically useful to define in plural.</p>\n\n  <h3 class="ui header">Examples of UI collections:</h3>\n  <ul class="ui list">\n    <li>Forms</li>\n    <li>Tables</li>\n    <li>Grids (Layout)</li>\n    <li>Menus</li>\n  </ul>\n\n  <h3 class="ui dividing header">UI Modules</h3>\n\n  <p>UI modules are elements whose behavior is a fundamental part of its definition. UI Modules are usually dependent on javascript which carries the implementation of it\'s behavior, although in some special circumstances the behavior can include css alone.</p>\n\n  <p>Examples of UI modules:</p>\n  <ul class="ui list">\n    <li>Popups</li>\n    <li>Modals</li>\n    <li>Chat Rooms</li>\n  </ul>\n\n  <h3 class="ui dividing header">UI Views</h3>\n\n  <p>UI Views are common tropes for presenting specific types of information. Unlike collections which focus specifically on the relation of interface elements, views focus specifically on the relation of site content to other pieces of site content.</p>\n\n  <h3 class="ui header">Examples of UI views:</h3>\n  <ul class="ui list">\n    <li>Comment Feed</li>\n    <li>Activity Feed</li>\n    <li>Product List</li>\n  </ul>\n\n  <div class="ui section divider"></div>\n  <a class="ui large right labeled teal icon button" href="/introduction/overview.html">\n    Next: Semantic Coding\n    <i class="right arrow icon"></i>\n  </a>\n\n</div>');
+      
+      }).call(this);
+      
+    }).call(__obj);
+    __obj.safe = __objSafe, __obj.escape = __escape;
+    return __out.join('');
+  };
+}).call(this);

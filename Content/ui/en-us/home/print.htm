@@ -1,0 +1,391 @@
+﻿<script type="text/javascript">
+    $(document).ready(function () {
+        AppState().Application.Model.RefreshBinding();
+        AppState().Application.Model.Program.ShowNav(false);
+        AppState().Application.Model.Program.ShowHeader(false);
+    });
+</script>
+<div class="Print">
+    <div class="Header">
+        <span class="HeaderLogo" />
+        <h1 data-bind="text: Program.Name" />
+        <h4>Application Form</h4>
+        <div class="ConfirmationAndDate">
+            <span class="Confirmation">
+                <label>Confirmation #:</label>
+                <label data-bind="text: Response.Enrollment.EnrollmentNumber">Unbound</label>
+            </span>
+            <span class="Date">
+                <label>Application Date:</label>
+                <label data-bind="text: Response.Enrollment.EnrollmentDate">Unbound</label>
+            </span>
+        </div>
+    </div>
+    <div class="PageTitle">CUSTOMER INFORMATION</div>
+    <div class="Section">
+        <div class="SectionLine Bold">
+            <span class="Field50">Account Number (required)</span>
+            <span class="Field50">If mobile home park, provide park's name</span>
+        </div>
+        <div class="SectionLine">
+            <span class="Field50 Box" data-bind="text: Response.Enrollment.ServiceAccountNo" />
+            <span class="Field50 Box" data-bind="text: Response.Enrollment.ParkName" />
+        </div>
+    </div>
+    <div class="Section">
+        <div class="SectionLine Bold">
+            <span class="Field100">First and Last Name (as it appears on your bill)</span>
+        </div>
+        <div class="SectionLine">
+            <span class="Field100 Box">
+                <span data-bind="text: Response.Enrollment.CustomerFirstName" />
+                <span data-bind="text: Response.Enrollment.CustomerLastName" />
+            </span>
+        </div>
+    </div>
+    <div class="Section">
+        <div class="SectionLine Bold">
+            <span class="Field50">Installation Address</span>
+            <span class="Field10">Unit</span>
+            <span class="Field20">City</span>
+            <span class="Field4">State</span>
+            <span class="Field16">ZIP Code</span>
+        </div>
+        <div class="SectionLine">
+            <span class="Field50 Box" data-bind="text: Response.ServiceAddress.Street1" />
+            <span class="Field10 Box" data-bind="text: Response.ServiceAddress.Unit" />
+            <span class="Field20 Box" data-bind="text: Response.ServiceAddress.City" />
+            <span class="Field4 Box" data-bind="text: Response.ServiceAddress.State" />
+            <span class="Field16 Box" data-bind="text: Response.ServiceAddress.PostalCode" />
+        </div>
+    </div>
+    <div class="Section" data-bind="visible: !Response.Enrollment.IsMailAddressSameAsInstall()">
+        <div class="SectionLine Bold" data-bind="visible: !Response.MailingAddress.IsPOBox()">
+            <span class="Field50">Mailing Address</span>
+            <span class="Field10">Unit</span>
+            <span class="Field20">City</span>
+            <span class="Field4">State</span>
+            <span class="Field16">ZIP Code</span>
+        </div>
+        <div class="SectionLine Bold" data-bind="visible: Response.MailingAddress.IsPOBox()">
+            <span class="Field25">Mailing PO Box</span>
+            <span class="Field25">City</span>
+            <span class="Field25">State</span>
+            <span class="Field25">ZIP Code</span>
+        </div>
+        <div class="SectionLine" data-bind="visible: !Response.MailingAddress.IsPOBox()">
+            <span class="Field50 Box">
+                <span class="MailingAddress" data-bind="text: Response.MailingAddress.Street1" />
+                <span class="MailingAddress" data-bind="text: Response.MailingAddress.Street2" />
+                <span class="MailingAddress" data-bind="text: Response.MailingAddress.Street3" />
+            </span>
+            <span class="Field10 Box" data-bind="text: Response.MailingAddress.Unit" />
+            <span class="Field20 Box" data-bind="text: Response.MailingAddress.City" />
+            <span class="Field4 Box" data-bind="text: Response.MailingAddress.State" />
+            <span class="Field16 Box" data-bind="text: Response.MailingAddress.PostalCode" />
+        </div>
+        <div class="SectionLine" data-bind="visible: Response.MailingAddress.IsPOBox()">
+            <span class="Field25 Box" data-bind="text: Response.MailingAddress.POBox" />
+            <span class="Field25 Box" data-bind="text: Response.MailingAddress.City" />
+            <span class="Field25 Box" data-bind="text: Response.MailingAddress.State" />
+            <span class="Field25 Box" data-bind="text: Response.MailingAddress.PostalCode" />
+        </div>
+    </div>
+    <div class="Section">
+        <div class="SectionLine Bold">
+            <span class="Field20">Phone</span>
+            <span class="Field20">Alternate Phone</span>
+            <span class="Field20">Fax</span>
+            <span class="Field40">Email</span>
+        </div>
+        <div class="SectionLine">
+            <span class="Field20 Box" data-bind="text: Response.Enrollment.HomePhone" />
+            <span class="Field20 Box" data-bind="text: Response.Enrollment.AltPhone" />
+            <span class="Field20 Box" data-bind="text: Response.Enrollment.FaxNumber" />
+            <span class="Field40 Box" data-bind="text: Response.Enrollment.CustomerEmail" />
+        </div>
+    </div>
+    <div class="Section">
+        <div class="SectionLine Bold">
+            <span class="Field33">Building Type</span>
+            <span class="Field33">Occupancy Status</span>
+            <span class="Field33">Construction Type</span>
+        </div>
+        <div class="SectionLine">
+            <span class="Field33 Box" data-bind="if: Response.Enrollment.BuildingTypeId">
+                <span data-bind="text: $.grep(Program.BuildingTypes, function (e) { return e.BuildingTypeId == Response.Enrollment.BuildingTypeId(); })[0].BuildingTypeName" />
+            </span>
+            <span class="Field33 Box" data-bind="if: Response.Enrollment.OccupancyStatusId">
+                <span data-bind="text: $.grep(Program.OccupancyStatuses, function (e) { return e.OccupancyStatusId == Response.Enrollment.OccupancyStatusId(); })[0].OccupancyStatus" />
+            </span>
+            <span class="Field33 Box" data-bind="text: Response.Enrollment.IsExisting()?'Existing':'New'" />
+        </div>
+    </div>
+    <div class="Section">
+        <div class="SectionLine Bold">
+            <span class="Field20">Air Conditioned</span>
+            <span class="Field30">Energy Audit Completed</span>
+            <span class="Field25">Benchmark Completed</span>
+            <span class="Field25">Benchmark Score</span>
+        </div>
+        <div class="SectionLine">
+            <span class="Field20 Box" data-bind="text: Response.Enrollment.IsAirConditioned" />
+            <span class="Field30 Box" data-bind="text: Response.Enrollment.AuditPerformed" />
+            <span class="Field25 Box" data-bind="text: Response.Enrollment.BenchmarkCompleted" />
+            <span class="Field15 Box" data-bind="text: Response.Enrollment.BenchmarkScore" />
+            <span class="Field10">
+                <span class="obj_CheckBoxUncheckedIcon" data-bind="visible: !Response.Enrollment.BenchmarkExempt()"/>
+                <span class="obj_CheckBoxCheckedIcon" data-bind="visible: Response.Enrollment.BenchmarkExempt()"/>
+                Exempt
+            </span>
+        </div>
+    </div>
+    <div class="Section">
+        <div class="SectionLine Bold">
+            <span class="Field100">Project Type</span>
+        </div>
+        <div class="SectionLine">
+            <span class="Field100 Box" data-bind="text: Response.Enrollment.ProjectTypeId" />
+        </div>
+    </div>
+    <div class="Section">
+        <div class="SectionLine Bold">
+            <span class="Field16">Year Built</span>
+            <span class="Field16">Sq. Footage</span>
+            <span class="Field16"># Rooms</span>
+            <span class="Field16"># Employees</span>
+            <span class="Field16"># Occupants</span>
+            <span class="Field20">Hrs. of Operation</span>
+        </div>
+        <div class="SectionLine">
+            <span class="Field16 Box" data-bind="text: Response.Enrollment.YearBuilt" />
+            <span class="Field16 Box" data-bind="text: Response.Enrollment.TotalSqFtLivingSpace" />
+            <span class="Field16 Box" data-bind="text: Response.Enrollment.NumberOfBedrooms" />
+            <span class="Field16 Box" data-bind="text: Response.Enrollment.NumberOfEmployees" />
+            <span class="Field16 Box" data-bind="text: Response.Enrollment.NumberOfOccupants" />
+            <span class="Field20 Box" data-bind="text: Response.Enrollment.WeeklyHoursOfOperation" />
+        </div>
+    </div>
+    <div class="Section">
+        <div class="SectionLine Bold">
+            <span class="Field100">How did you hear about us?</span>
+        </div>
+        <div class="SectionLine">
+            <span class="Field100 Box" data-bind="if: Response.Enrollment.LeadSourceId">
+                <span data-bind="text: $.grep(Program.LeadSources, function (e) { return e.LeadSourceId == Response.Enrollment.LeadSourceId(); })[0].LeadSource" />
+            </span>
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+    <div class="PageTitle">INSTALLER INFORMATION</div>
+    <div class="Section">
+        <div class="SectionLine Bold">
+            <span class="Field100">Work Performed By</span>
+        </div>
+        <div class="SectionLine">
+            <span class="Field100 Box" data-bind="text: Response.Enrollment.IsSelfInstalled()?'Self-Installed':'Contractor'"></span>
+        </div>
+    </div>
+    <div class="Section">
+        <div class="SectionLine Bold">
+            <span class="Field50">Company</span>
+            <span class="Field50">Doing Business As (DBA)</span>
+        </div>
+        <div class="SectionLine">
+            <span class="Field50 Box" data-bind="text: Response.Contractor.ContractorName" />
+            <span class="Field50 Box">Unbound</span>
+        </div>
+    </div>
+    <div class="Section">
+        <div class="SectionLine Bold">
+            <span class="Field100">First and Last Name of the Installer</span>
+        </div>
+        <div class="SectionLine">
+            <span class="Field100 Box" data-bind="text: Response.Contractor.ContractorEmployee.FullName" />
+        </div>
+    </div>
+    <div class="Section">
+        <div class="SectionLine Bold">
+            <span class="Field50">Mailing Address</span>
+            <span class="Field10">Unit</span>
+            <span class="Field20">City</span>
+            <span class="Field4">State</span>
+            <span class="Field16">ZIP Code</span>
+        </div>
+        <div class="SectionLine">
+            <span class="Field50 Box">
+                <span class="MailingAddress" data-bind="text: Response.Contractor.ContractorAddress.Attn" />
+                <span class="MailingAddress" data-bind="text: Response.Contractor.ContractorAddress.Street1" />
+                <span class="MailingAddress" data-bind="visible: Response.Contractor.ContractorAddress.Street2">
+                    <span data-bind="text: Response.Contractor.ContractorAddress.Street2" />
+                </span>
+                <span class="MailingAddress" data-bind="visible: Response.Contractor.ContractorAddress.Street3">
+                    <span data-bind="text: Response.Contractor.ContractorAddress.Street3" />
+                </span>
+            </span>
+            <span class="Field10 Box" data-bind="text: Response.Contractor.ContractorAddress.Unit" />
+            <span class="Field20 Box" data-bind="text: Response.Contractor.ContractorAddress.City" />
+            <span class="Field4 Box" data-bind="text: Response.Contractor.ContractorAddress.State" />
+            <span class="Field16 Box" data-bind="text: Response.Contractor.ContractorAddress.PostalCode" />
+        </div>
+    </div>
+    <div class="Section">
+        <div class="SectionLine Bold">
+            <span class="Field25">Phone</span>
+            <span class="Field25">Fax</span>
+            <span class="Field50">Email Address</span>
+        </div>
+        <div class="SectionLine">
+            <span class="Field25 Box" data-bind="text: Response.Contractor.ContractorEmployee.Phone" />
+            <span class="Field25 Box" data-bind="text: Response.Contractor.ContractorEmployee.Fax" />
+            <span class="Field50 Box" data-bind="text: Response.Contractor.ContractorEmployee.Email" />
+        </div>
+    </div>
+    <div class="Section">
+        <div class="SectionLine Bold">
+            <span class="Field50">Type of License</span>
+            <span class="Field25">License Number</span>
+            <span class="Field25">Expiration Date</span>
+        </div>
+        <div class="SectionLine" data-bind="foreach: Response.Contractor.ContractorLicenses">
+            <span class="Field50 Box" data-bind="text: ContractorLicenseId" />
+            <span class="Field25 Box" data-bind="text: LicenseNumber" />
+            <span class="Field25 Box" data-bind="text: TerminationDate" />
+        </div>
+    </div>
+
+    <div class="PageTitle">PAYEE INFORMATION</div>
+    <div class="Section">
+        <div class="SectionLine Bold">
+            <span class="Field75">First and Last Name</span>
+            <span class="Field25">Phone</span>
+        </div>
+        <div class="SectionLine">
+            <span class="Field75 Box" data-bind="text: Response.Enrollment.PayeeName" />
+            <span class="Field25 Box" data-bind="text: Response.Enrollment.PayeePhoneNumber" />
+        </div>
+    </div>
+    <div class="Section" data-bind="with: Response.Enrollment.PayeeAddress">
+        <div class="SectionLine Bold" data-bind="visible: !IsPOBox()">
+            <span class="Field50">Mailing Address</span>
+            <span class="Field10">Unit</span>
+            <span class="Field20">City</span>
+            <span class="Field4">State</span>
+            <span class="Field16">ZIP Code</span>
+        </div>
+        <div class="SectionLine Bold" data-bind="visible: IsPOBox()">
+            <span class="Field25">Mailing PO Box</span>
+            <span class="Field25">City</span>
+            <span class="Field25">State</span>
+            <span class="Field25">ZIP Code</span>
+        </div>
+        <div class="SectionLine" data-bind="visible: !IsPOBox()">
+            <span class="Field50 Box">
+                <span class="MailingAddress" data-bind="text: Street1" />
+                <span class="MailingAddress" data-bind="text: Street2" />
+                <span class="MailingAddress" data-bind="text: Street3" />
+            </span>
+            <span class="Field10 Box" data-bind="text: Unit" />
+            <span class="Field20 Box" data-bind="text: City" />
+            <span class="Field4 Box" data-bind="text: State" />
+            <span class="Field16 Box" data-bind="text: PostalCode" />
+        </div>
+        <div class="SectionLine" data-bind="visible: IsPOBox()">
+            <span class="Field25 Box" data-bind="text: POBox" />
+            <span class="Field25 Box" data-bind="text: City" />
+            <span class="Field25 Box" data-bind="text: State" />
+            <span class="Field25 Box" data-bind="text: PostalCode" />
+        </div>
+    </div>
+    <div class="Section">
+        <div class="SectionLine Bold">
+            <span class="Field50">Tax Status</span>
+            <span class="Field50">Tax Number</span>
+        </div>
+        <div class="SectionLine">
+            <span class="Field50 Box" data-bind="if: Response.Enrollment.PayeeTaxStatusId">
+                <span data-bind="text: $.grep(Program.TaxStatusTypes, function (e) { return e.TaxStatusId == Response.Enrollment.PayeeTaxStatusId(); })[0].Description" />
+            </span>
+            <span class="Field50 Box" data-bind="text: Response.Enrollment.PayeeTaxIdSSN" />
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+    <div class="PageTitle">EQUIPMENT INFORMATION</div>
+    <div class="Section Equipment">
+        <div class="EquipmentTitleLine">
+            <div class="Item">Item</div>
+            <div class="Quantity">Quantity</div>
+            <div class="Total">Total</div>
+        </div>
+        <div data-bind="foreach: Response.EnrollmentMeasures">
+            <div class="EquipmentLine">
+                <div class="Item MinusBottom">
+                    <span class="EquipmentName" data-bind="text: MeasureFullName" />
+                    <span class="EquipmentDescription">Unbound</span>
+                    <div data-bind="foreach: Properties">
+                        <div class="EquipmentProperty" >
+                            <span class="EquipmentPropertyName" data-bind="text: PropertyType" />
+                            <!-- ko if: ControlType === "textbox" -->
+                                <span class="EquipmentPropertyValue" data-bind="text: InstallationPropertyValue" />
+                            <!-- /ko -->
+                            <!-- ko if: ControlType === "dropdownlist" -->
+                                <span class="EquipmentPropertyValue" data-bind="text: SelectedInstallationPropertyItem.text" />
+                            <!-- /ko -->
+                            <!-- ko if: ControlType === "date" -->
+                                <span class="EquipmentPropertyValue"l data-bind="text: InstallationPropertyValue" />
+                            <!-- /ko -->
+                            <!-- ko if: ControlType === "checkbox" -->
+                                <span class="EquipmentPropertyValue" data-bind="text: InstallationPropertyValue" />
+                            <!-- /ko -->
+                            <!-- ko if: ControlType === "checkboxgroup" -->
+                                <span class="EquipmentPropertyValue" data-bind="text: SelectedInstallationPropertyItems().map(function (item) { return item.text; }).join(', ')" />
+                            <!-- /ko -->
+                            <!-- ko if: InstallationPropertyControlTypeId() === 6 -->
+                                What control is this?
+                                <label />
+                            <!-- /ko -->
+                            <!-- ko if: ControlType === "numericvalue" -->
+                                <span class="EquipmentPropertyValue" data-bind="text: InstallationPropertyValue" />
+                            <!-- /ko -->
+                            <!-- ko if: ControlType === "formula" -->
+                                <span class="EquipmentPropertyValue" data-bind="text: CalculatedPropertyValue" />
+                            <!-- /ko -->
+                        </div>
+                    </div>
+                </div>
+                <div class="Quantity MinusBottom Right">
+                    <span class="EquipmentQuantity" data-bind="text: PlannedMeasureQty" />
+                </div>
+                <div class="Total MinusBottom Right">
+                    $<span data-bind="text: IncentiveUnitAmount" />
+                </div>
+            </div>
+        </div>
+        <div class="EquipmentBottomLine">
+            <div class="Item Center">Onsite verification may be required before payment is issued.</div>
+            <div class="Quantity Bold Right">Total:</div>
+            <div class="Total Bold Right">
+                <span data-bind="text: Response.EnrollmentMeasures.Amount" />
+            </div>
+        </div>
+    </div>
+
+    <div class="page-break"></div>
+    <div class="PageTitle">Terms and Conditions</div>
+    <div class="Section">
+        <div class="Terms" data-bind="html: Program.TermsAndConditions" />
+    </div>
+    <div class="Section">
+        <div class="Agree">
+            <span class="obj_CheckBoxIcon" />
+            I Agree to the Terms and Conditions of this program
+        </div>
+        <div data-bind="visible: Program.Settings.IncludeSignatureOnPrint" class="Agree">
+            <span class="Signature">X</span>
+            <span class="SignatureDate">Date:</span>
+        </div>
+    </div>
+    
+</div>

@@ -1,0 +1,43 @@
+﻿<script type="text/javascript">
+    $(document).ready(function () {
+        AppState().Application.Model.RefreshBinding();
+        AppState().Application.Model.Program.ShowNav(false);
+
+        function getStatus() {
+            if (tbConfirmationNumber.value == "") tbConfirmationNumber.value = "0";
+            AJAXLoadData("/Method/GetEnrollmentStatusByProgramAndEnrollmentNumber", {
+                programId: AppState().Application.Model.Program.Id,
+                enrollmentNumber: tbConfirmationNumber.value
+            }, function (msg) {
+                statusText.textContent = msg.Data.status;
+                bubble.style.display = "block";
+            });
+        }
+
+        $("#btnCheck").click(function () {
+            getStatus();
+        });
+
+        $('#tbConfirmationNumber').bind("enterKey", function (e) {
+            getStatus();
+        });
+        $('#tbConfirmationNumber').keyup(function (e) {
+            if (e.keyCode == 13) {
+                $(this).trigger("enterKey");
+            }
+        });
+    });
+</script>
+<div class="Status">
+    <span data-bind="html: Program.Settings.StatusCheckStepDescription" />
+</div>
+<div class="StatusCheck">
+    <span class="CouplePicture" />
+    <div class="StatusOnTop">
+        <input type="text" id="tbConfirmationNumber" />
+        <input type="button" id="btnCheck" value="Check Status" />
+        <div id="bubble" class="StatusBubble" style="display: none;">
+            <span id="statusText" />
+        </div>
+    </div>
+</div>

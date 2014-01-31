@@ -1,0 +1,744 @@
+﻿body {
+    font-size: .85em;
+    font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
+    color: #232323;
+    background-color: #fff;
+}
+
+nav {
+    float: left;
+    margin-right: 5px;
+}
+
+    #content, nav ul, header {
+        background-color: #dddddd;
+    }
+
+header, footer, nav, section {
+    display: block;
+}
+
+#content div.Workspace {
+    clear: both;
+}
+
+#tbCompany, #tbContactName {
+    width: 196px;
+    margin-bottom: 3px;
+}
+#sbContactName {
+    width: 163px;
+}
+#sbContactIdError, #sbContactNameError {
+    margin-left: 35px;
+}
+
+.Agree .Signature {
+    border-bottom: 1px solid black;
+    width: 70%;
+    display: block;
+    float: left;
+    text-align: left;
+    margin: 0px 0px 5px 15px;
+    font-size: 23px;
+}
+
+.Agree .SignatureDate {
+    border-bottom: 1px solid black;
+    width: 26%;
+    display: block;
+    float: left;
+    text-align: left;
+    margin: 0px 15px 5px 0px;
+    font-size: 23px;
+}
+
+.ui-combobox {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 3px;
+}
+
+.ui-combobox-toggle {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    margin-left: -1px;
+    padding: 0;
+    /* support: IE7 */
+    *height: 1.7em;
+    *top: 0.1em;
+}
+
+.ui-combobox-input {
+    margin: 0;
+    padding: 0.3em;
+}
+
+ul {
+    list-style-type: none;
+}
+
+    ul.FormFields li {
+        min-height: 26px;
+    }
+
+        ul.FormFields li > label {
+            display: block;
+            width: 200px;
+            float: left;
+        }
+
+    ul.FormFields label.DataLabel {
+        display: inline-block;
+        float: none;
+    }
+
+    ul.FormFields input[type=text] {
+        width: 200px;
+    }
+
+    ul.FormFields input[type=number] {
+        width: 200px;
+    }
+
+    ul.FormFields select {
+        width: 204px;
+    }
+
+    ul.FormFields input.ShorterTextBox {
+        width: 127px;
+    }
+
+    ul.FormFields input.DateTextBox {
+        width: 160px;
+    }
+
+    ul.FormFields span.Field {
+        float: left;
+        width: 204px;
+    }
+
+    ul.FormFields span.HorizontalRadio {
+        display: inline-block;
+        min-width: 204px;
+    }
+
+    ul.FormFields div.Field {
+        display: inline-table;
+        width: 200px;
+    }
+
+    ul.ErrorMessages {
+        display: inline-block;
+    }
+
+    ul.PropertyGroup {
+        padding-left: 0;
+    }
+
+.GettingStarted label {
+    width: auto;
+}
+
+ul.questions {
+    padding-left: 0px;
+}
+
+ul.questions, ul.answers {
+    clear: both;
+}
+
+    ul.questions > li, ul.answers > li {
+        display: block;
+        clear: both;
+    }
+
+        ul.questions > li > label {
+            width: auto;
+            float: none;
+        }
+
+        ul.questions > li > span.ErrorText {
+            color: red;
+            display: block;
+            clear: both;
+        }
+
+    ul.questions ul.answers li > label, ul.questions ul.answers li > input {
+        float: left;
+    }
+
+div.QuestionBlockWithSeparatorAtBottom {
+    margin-top: 20px;
+    border-bottom: solid;
+    border-bottom-color: gray;
+}
+
+.RoundedBox {
+    background-color: white;
+    border: solid;
+    border-radius: 4px;
+    -moz-border-radius: 4px;
+    -webkit-border-radius: 4px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%); /* IE 9 */
+    -webkit-transform: translate(-50%,-50%); /* Safari and Chrome */
+}
+
+.ErrorIcon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url(themes/base/images/ui-icons_cd0a0a_256x240.png) /*{iconsContent}*/;
+    background-position: 0px -144px;
+}
+
+.Panel {
+    border: solid;
+    display: block;
+    width: 480px;
+    padding: 5px;
+}
+
+.EquipmentDoNotQualify {
+    top: 0px;
+    left: 0px;
+    float: left;
+}
+
+.PanelTopLine {
+    position: relative;
+}
+
+    .PanelTopLine span.PanelDeleteButton {
+        position: absolute;
+        top: 0;
+        right: 0;
+    }
+
+label.BoldLabel {
+    font-weight: bold;
+}
+
+label.ItalicLabel {
+    font-style: italic;
+}
+
+.obj_FieldAlert {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url(themes/base/images/ui-icons_cd0a0a_256x240.png) /*{iconsContent}*/;
+    background-position: 0px -144px;
+}
+
+.obj_DeleteButton {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url(themes/base/images/ui-icons_cd0a0a_256x240.png) /*{iconsContent}*/;
+    background-position: -32px -192px;
+}
+
+.obj_HelpIcon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url(themes/base/images/ui-icons_2e83ff_256x240.png) /*{iconsContent}*/;
+    background-position: -48px -144px;
+}
+
+.obj_AlertIcon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url(themes/base/images/ui-icons_ffff00_256x240.png) /*{iconsContent}*/;
+    background-position: 0px -144px;
+}
+
+.obj_PencilIcon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url(themes/base/images/ui-icons_222222_256x240.png) /*{iconsContent}*/;
+    background-position: -64px -112px;
+}
+
+.obj_PrintIcon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url(themes/base/images/ui-icons_222222_256x240.png) /*{iconsContent}*/;
+    background-position: -160px -96px;
+}
+
+.obj_CheckBoxCheckedIcon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url(themes/base/images/ui-icons_222222_256x240.png) /*{iconsContent}*/;
+    background-position: -80px -208px;
+}
+
+.obj_CheckBoxUncheckedIcon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url(themes/base/images/ui-icons_222222_256x240.png) /*{iconsContent}*/;
+    background-position: -32px -208px;
+}
+
+.obj_DocumentIcon {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background-image: url(themes/base/images/ui-icons_222222_256x240.png) /*{iconsContent}*/;
+    background-position: -32px -96px;
+}
+
+span.tooltip {
+    outline: none;
+}
+
+    span.tooltip strong {
+        line-height: 30px;
+    }
+
+    span.tooltip:hover {
+        text-decoration: none;
+    }
+
+    span.tooltip span.TooltipText {
+        z-index: 10;
+        display: none;
+        padding: 14px 20px;
+        margin-top: 20px;
+        width: auto;
+        line-height: 16px;
+    }
+
+    span.tooltip:hover span.TooltipText {
+        display: inline;
+        position: absolute;
+        color: #111;
+        border: 1px solid #111;
+        background: lightgray;
+    }
+
+    span.tooltip span.TooltipText {
+        border-radius: 4px;
+        -moz-border-radius: 4px;
+        -webkit-border-radius: 4px;
+        -moz-box-shadow: 5px 5px 8px #CCC;
+        -webkit-box-shadow: 5px 5px 8px #CCC;
+        box-shadow: 5px 5px 8px #CCC;
+    }
+
+.InsufficientFundsMessage {
+    margin-top: 20px;
+    border-top-style: solid;
+    border-bottom-style: solid;
+}
+
+.DocumentName {
+    font-style: italic;
+    border-bottom-style: solid;
+    width: 100%;
+}
+
+.AddButton {
+    margin-top: 20px;
+}
+
+div.Questionnaire {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+div.TermsAndConditions {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    height: 192px;
+    width: 450px;
+    overflow: auto;
+    border-style: solid;
+}
+
+div.WelcomeMessage {
+    margin-bottom: 1em;
+}
+
+span.ReviewLine {
+    display: block;
+    margin-left: 20px;
+}
+
+span.ReviewHeaderLine {
+    margin-top: 20px;
+    display: block;
+}
+
+span.ReviewInsideHeaderLine {
+    margin-top: 10px;
+    margin-left: 20px;
+    display: block;
+}
+
+div.ReviewList {
+    margin-bottom: 20px;
+}
+
+div.GroupedReview {
+    margin-bottom: 10px;
+}
+
+    div.GroupedReview span.Group {
+        margin-bottom: 10px;
+        display: block;
+    }
+
+div.Error {
+    display: inline;
+    vertical-align: top;
+}
+
+div.Confirmation {
+    margin-bottom: 20px;
+}
+
+span.ConfirmationPicture {
+    top: 0;
+    right: 0;
+    float: right;
+    width: 299px;
+    height: 425px;
+    background-position: 0px 0px;
+    background-image: url(./Content/images/congrats.png);
+}
+
+div.Status {
+    background-color: white;
+    padding: 10px;
+    width: 599px;
+}
+
+div.StatusCheck {
+    position: relative;
+    padding: 10px;
+    width: 599px;
+    height: 218px;
+}
+
+div.StatusCheck div.StatusOnTop {
+    z-index: 100;
+    position: absolute;
+}
+
+div.StatusCheck div.StatusOnTop div.StatusBubble {
+    background-color: white;
+    margin: 10px;
+    padding: 5px;
+    max-width: 270px;
+    max-height: 80px;
+    border: solid;
+    border-radius: 10px;
+    -moz-border-radius: 10px;
+    -webkit-border-radius: 10px;
+}
+
+span.CouplePicture {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 619px;
+    height: 218px;
+    background-position: 0px 0px;
+    background-image: url(./Content/images/couple2.png);
+}
+
+div.Dialog div.SectionWithLineAtBottom {
+    border-bottom-style: solid;
+}
+
+div.Dialog span.Title {
+    display: inline-block;
+    font-size: x-large;
+}
+
+div.Dialog span.ItemTitle {
+    display: block;
+    font-size: large;
+}
+
+div.Dialog div.Field {
+    width: 400px;
+}
+
+div.Dialog textarea.Description {
+    width: 100%;
+}
+
+div.Dialog select {
+    width: 80%
+}
+
+div.Dialog input[type=file] {
+    width: 80%
+}
+
+@media all {
+    .page-break {
+        display: none;
+    }
+
+    div.Print {
+        width: 800px;
+        background-color: white;
+    }
+}
+
+@media print {
+    .page-break {
+        display: block;
+        page-break-before: always;
+    }
+
+    div.Print {
+        width: 100%;
+        background-color: white;
+    }
+}
+
+    div.Print .Bold {
+        font-weight: bold;
+    }
+
+    div.Print .Center {
+        text-align: center;
+    }
+
+    div.Print .Right {
+        text-align: right;
+    }
+
+    div.Print div.Header {
+        display: block;
+        top: 0;
+        width: 100%;
+        margin-bottom: 1em;
+    }
+
+    div.Print div.ConfirmationAndDate {
+        border-top-style: solid;
+        width: 100%;
+    }
+
+        div.Print div.ConfirmationAndDate span.Date {
+            float: right;
+        }
+
+    div.Print div.PageTitle {
+        border-style: solid;
+        background-color: lightgray;
+        margin-top: 4px;
+        font-weight: bold;
+        font-size: large;
+    }
+
+    div.Print div.Section {
+        border-left-style: solid;
+        border-right-style: solid;
+        border-bottom-style: solid;
+    }
+
+        div.Print div.Section div.SectionLine {
+            width: 100%;
+            display: table;
+            border-spacing: 4px 2px;
+        }
+
+        div.Print div.Section span.Box {
+            border-style: solid;
+            height: 19px;
+        }
+
+        div.Print div.Section span.Field100 {
+            display: table-cell;
+            width: 100%;
+        }
+
+        div.Print div.Section span.Field75 {
+            display: table-cell;
+            width: 75%;
+        }
+
+        div.Print div.Section span.Field60 {
+            display: table-cell;
+            width: 60%;
+        }
+
+        div.Print div.Section span.Field50 {
+            display: table-cell;
+            width: 50%;
+        }
+
+        div.Print div.Section span.Field40 {
+            display: table-cell;
+            width: 40%;
+        }
+
+        div.Print div.Section span.Field33 {
+            display: table-cell;
+            width: 33%;
+        }
+
+        div.Print div.Section span.Field30 {
+            display: table-cell;
+            width: 30%;
+        }
+
+        div.Print div.Section span.Field25 {
+            display: table-cell;
+            width: 25%;
+        }
+
+        div.Print div.Section span.Field20 {
+            display: table-cell;
+            width: 20%;
+        }
+
+        div.Print div.Section span.Field16 {
+            display: table-cell;
+            width: 16%;
+        }
+
+        div.Print div.Section span.Field15 {
+            display: table-cell;
+            width: 15%;
+        }
+
+        div.Print div.Section span.Field10 {
+            display: table-cell;
+            width: 10%;
+        }
+
+        div.Print div.Section span.Field5 {
+            display: table-cell;
+            width: 5%;
+        }
+
+        div.Print div.Section span.Field4 {
+            display: table-cell;
+            width: 4%;
+        }
+
+        div.Print div.Section div.Terms {
+            display: table;
+            width: 100%;
+        }
+
+        div.Print div.Section div.Agree {
+            display: table;
+            width: 100%;
+            text-align: center;
+            font-size: large;
+        }
+
+        div.Print div.Section span.MailingAddress {
+            display: block;
+        }
+
+    div.Print div.Equipment {
+        border-left-style: solid;
+        border-right-style: solid;
+        border-bottom-style: solid;
+        padding: 4px;
+    }
+
+        div.Print div.Equipment div.Item {
+            display: table-cell;
+            width: 60%;
+            border-style: solid;
+            border-right: none;
+        }
+
+        div.Print div.Equipment div.Quantity {
+            display: table-cell;
+            width: 20%;
+            border-style: solid;
+        }
+
+        div.Print div.Equipment div.Total {
+            display: table-cell;
+            width: 20%;
+            border-style: solid;
+            border-left: none;
+        }
+
+        div.Print div.Equipment div.EquipmentTitleLine {
+            width: 100%;
+            display: table;
+            font-weight: bold;
+            margin-bottom: 4px;
+            background-color: lightgray;
+            font-size: large;
+        }
+
+        div.Print div.Equipment div.EquipmentLine {
+            width: 100%;
+            display: table;
+            page-break-inside: avoid;
+        }
+
+        div.Print div.Equipment div.EquipmentLine div.EquipmentProperty {
+            width: 100%;
+            display: table;
+            border-spacing: 4px;
+            page-break-after:avoid;
+            page-break-before:avoid;
+        }
+
+        div.Print div.Equipment div.EquipmentLine div.EquipmentProperty span.EquipmentPropertyName {
+            width: 25%;
+            height: 25px;
+            display: table-cell;
+            text-align: right;
+        }
+
+        div.Print div.Equipment div.EquipmentLine div.EquipmentProperty span.EquipmentPropertyValue {
+            width: 75%;
+            height: 19px;
+            display: table-cell;
+            border-style: solid;
+        }
+
+        div.Print div.Equipment div.EquipmentLine span.EquipmentName {
+            font-weight: bold;
+            display: block;
+            page-break-after:avoid;
+            page-break-before:avoid;
+        }
+
+        div.Print div.Equipment div.EquipmentLine span.EquipmentDescription {
+            display: block;
+            page-break-after:avoid;
+            page-break-before:avoid;
+        }
+
+        div.Print div.Equipment div.EquipmentLine * { 
+            page-break-after:avoid;
+            page-break-before:avoid;
+        }
+
+        div.Print div.Equipment div.MinusBottom {
+            border-bottom-style: none;
+        }
+
+        div.Print div.Equipment div.EquipmentBottomLine {
+            width: 100%;
+            display: table;
+        }

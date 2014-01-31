@@ -1,0 +1,227 @@
+﻿<script type="text/javascript">
+    $(function () {
+        AppState().Application.Model.Steps.Next.BeforeClick = function (wasSuccessful) {
+            var isValid = AppState().Application.Model.Response.IsValidPayeeInformation();
+            console.log("Is valid payee information: " + isValid);
+            return wasSuccessful(isValid);
+        };
+        AppState().Application.Model.RefreshBinding();
+    });
+</script>
+<p data-bind="html: Program.Settings.PayeeStepDescription"></p>
+<div class="card">
+<form class="QuestionBlockWithSeparatorAtBottom" role="form">
+    <ul class="FormFields form-horizontal">
+        <li class="form-group">
+            <label class="col-sm-4 control-label">Who should receive the payment?</label>
+            <div class="col-sm-8">
+                <span class="HorizontalRadio" data-bind="foreach: Program.PaymentToTypes">
+                    <input type="radio" name="rbPaymentToType" data-bind="checked: $root.Response.Enrollment.PaymentToId, value: PaymentToId" />
+                    <label data-bind="text: Label">Unbound</label>
+                </span>
+            </div>
+        </li>
+       
+        <li class="form-group">
+            <label for="tbName" class="col-sm-4 control-label">
+                Name:
+            </label>
+            <span class="col-sm-8">
+                <input type="text" id="tbName" data-bind="value: Response.Enrollment.PayeeName, visible: Response.Enrollment.PaymentToId.IsEditable" />
+                <span data-bind="text: Response.Enrollment.PayeeName.Prepopulated, visible: !Response.Enrollment.PaymentToId.IsEditable()">Unbound</span>
+            </span>
+            <span class="Error" data-bind="visible: !Response.Enrollment.PayeeName.IsValid()">
+                <span class="tooltip">
+                    <span class="ErrorIcon" />
+                    <span class="TooltipText" data-bind="foreach: Response.Enrollment.PayeeName.ValidationMessages">
+                        <span data-bind="text: $data" /><br />
+                    </span>
+                </span>
+            </span>
+        </li>
+        <li data-bind="visible: false" class="form-group">
+            <label for="tbDoingBusinessAs" class="col-sm-4 control-label">
+                Doing Business As:
+            </label>
+            <span class="col-sm-8">
+                <input type="text" class="form-control" id="tbDoingBusinessAs" data-bind="visible: Response.Enrollment.PaymentToId.IsEditable" />
+            </span>
+        </li>
+        <li class="form-group">
+            <label for="tbPhone" class="col-sm-4 control-label">
+                Phone:
+            </label>
+            <span class="col-sm-8">
+                <input type="text" class="form-control" id="tbPhone" data-bind="value: Response.Enrollment.PayeePhoneNumber, visible: Response.Enrollment.PaymentToId.IsEditable" />
+                <span data-bind="text: Response.Enrollment.PayeePhoneNumber.Prepopulated, visible: !Response.Enrollment.PaymentToId.IsEditable()">Unbound</span>
+            </span>
+            <span class="Error" data-bind="visible: !Response.Enrollment.PayeePhoneNumber.IsValid()">
+                <span class="tooltip">
+                    <span class="ErrorIcon" />
+                    <span class="TooltipText" data-bind="foreach: Response.Enrollment.PayeePhoneNumber.ValidationMessages">
+                        <span data-bind="text: $data" /><br />
+                    </span>
+                </span>
+            </span>
+        </li>
+        <li data-bind="visible: Program.Settings.PayeeOptionsCollectSSN" class="form-group">
+            <label for="sbTaxStatus" class="col-sm-4 control-label">
+                Tax Status:
+            </label>
+            <span class="col-sm-8">
+                <select id="sbTaxStatus" class="form-control" data-bind="options: Program.TaxStatusTypes, optionsValue: 'TaxStatusId', optionsText: 'Description', value: Response.Enrollment.PayeeTaxStatusId"></select>
+            </span>
+            <span class="Error" data-bind="visible: !Response.Enrollment.PayeeTaxStatusId.IsValid()">
+                <span class="tooltip">
+                    <span class="ErrorIcon" />
+                    <span class="TooltipText" data-bind="foreach: Response.Enrollment.PayeeTaxStatusId.ValidationMessages">
+                        <span data-bind="text: $data" /><br />
+                    </span>
+                </span>
+            </span>
+        </li>
+        <li data-bind="visible: Program.Settings.PayeeOptionsCollectSSN" class="form-group">
+            <label for="rbTaxIDType" class="col-sm-4 control-label">
+                Tax ID Type:
+            </label>
+            <span class="HorizontalRadio col-sm-8" data-bind="foreach: Program.TaxIdTypes">
+                <input type="radio" name="rbTaxIDType" data-bind="checked: $root.Response.Enrollment.PayeeTaxIdTypeId, value: TaxIdTypeId" />
+                <label data-bind="text: Description"></label>
+            </span>
+            <span class="Error" data-bind="visible: !Response.Enrollment.PayeeTaxIdTypeId.IsValid()">
+                <span class="tooltip">
+                    <span class="ErrorIcon" />
+                    <span class="TooltipText" data-bind="foreach: Response.Enrollment.PayeeTaxIdTypeId.ValidationMessages">
+                        <span data-bind="text: $data" /><br />
+                    </span>
+                </span>
+            </span>
+        </li>
+        <li data-bind="visible: Program.Settings.PayeeOptionsCollectSSN" class="form-group">
+            <label for="tbTaxIDNumber" class="col-sm-4 control-label">
+                Tax ID Number:
+            </label>
+            <span class="col-sm-8">
+                <input type="text" class="form-control" id="tbTaxIDNumber" data-bind="value: Response.Enrollment.PayeeTaxIdSSN" />
+            </span>
+            <span class="Error" data-bind="visible: !Response.Enrollment.PayeeTaxIdSSN.IsValid()">
+                <span class="tooltip">
+                    <span class="ErrorIcon" />
+                    <span class="TooltipText" data-bind="foreach: Response.Enrollment.PayeeTaxIdSSN.ValidationMessages">
+                        <span data-bind="text: $data" /><br />
+                    </span>
+                </span>
+            </span>
+        </li>
+    </ul>
+</form>
+<form class="QuestionBlockWithSeparatorAtBottom" role="form">
+    <h3>Mailing Address</h3>
+    <ul class="FormFields form-horizontal" data-bind="with: Response.Enrollment.PayeeAddress">
+        <li data-bind="visible: $root.Response.Enrollment.PaymentToId.IsEditable">Is this a PO Box?
+        </li>
+        <li data-bind="visible: $root.Response.Enrollment.PaymentToId.IsEditable">
+            <input type="radio" name="rbIsPOBox" data-bind="enable: $root.Response.Enrollment.PaymentToId.IsEditable, checkedValue: true, checked: IsPOBox" />
+            Yes
+                <input type="radio" name="rbIsPOBox" data-bind="enable: $root.Response.Enrollment.PaymentToId.IsEditable, checkedValue: false, checked: IsPOBox" />
+            No
+        </li>
+        <li class="form-group">
+            <label for="tbCareOf" class="col-sm-4 control-label">
+                Care Of:
+            </label>
+            <span class="col-sm-8">
+                <input type="text" class="form-control" id="tbCareOf" data-bind="enable: $root.Response.Enrollment.PaymentToId.IsEditable, value: Attn" />
+            </span>
+        </li>
+        <li data-bind="visible: IsPOBox" class="form-group">
+            <label for="tbPOBox" class="col-sm-4 control-label">
+                PO Box:
+            </label>
+            <span class="col-sm-8">
+                <input type="text" class="form-control" id="tbPOBox" data-bind="enable: $root.Response.Enrollment.PaymentToId.IsEditable, value: POBox" />
+            </span>
+            <div class="Error" data-bind="visible: $root.Response.Enrollment.PaymentToId.IsEditable() && !POBox.IsValid()">
+                <span class="tooltip">
+                    <span class="ErrorIcon" />
+                    <span class="TooltipText" data-bind="foreach: !POBox.ValidationMessages">
+                        <span data-bind="text: $data" /><br />
+                    </span>
+                </span>
+            </div>
+        </li>
+        <li data-bind="visible: !IsPOBox()" class="form-group">
+            <label for="tbStreet" class="col-sm-4 control-label">
+                Street:
+            </label>
+            <span class="col-sm-8">
+                <input type="text" class="form-control" id="tbStreet" data-bind="enable: $root.Response.Enrollment.PaymentToId.IsEditable, value: Street1" />
+            </span>
+            <div class="Error" data-bind="visible: $root.Response.Enrollment.PaymentToId.IsEditable() && !Street1.IsValid()">
+                <span class="tooltip">
+                    <span class="ErrorIcon" />
+                    <span class="TooltipText" data-bind="foreach: !Street1.ValidationMessages">
+                        <span data-bind="text: $data" /><br />
+                    </span>
+                </span>
+            </div>
+        </li>
+        <li data-bind="visible: !IsPOBox()" class="form-group">
+            <label for="tbMailingUnit" class="col-sm-4 control-label">
+                Unit:
+            </label>
+            <span class="col-sm-8">
+                <input type="text" class="form-control" id="tbMailingUnit" data-bind="enable: $root.Response.Enrollment.PaymentToId.IsEditable, value: Unit" />
+            </span>
+        </li>
+        <li class="form-group">
+            <label for="tbZIP" class="col-sm-4 control-label">
+                ZIP / Postal Code:
+            </label>
+            <span class="col-sm-8">
+                <input type="text" class="form-control" id="tbZIP" data-bind="enable: $root.Response.Enrollment.PaymentToId.IsEditable, value: PostalCode" />
+            </span>
+            <div class="Error" data-bind="visible: $root.Response.Enrollment.PaymentToId.IsEditable() && !PostalCode.IsValid()">
+                <span class="tooltip">
+                    <span class="ErrorIcon" />
+                    <span class="TooltipText" data-bind="foreach: !PostalCode.ValidationMessages">
+                        <span data-bind="text: $data" /><br />
+                    </span>
+                </span>
+            </div>
+        </li>
+        <li class="form-group">
+            <label for="tbCity" class="col-sm-4 control-label">
+                City:
+            </label>
+            <span class="col-sm-8">
+                <input type="text" class="form-control" id="tbCity" data-bind="enable: $root.Response.Enrollment.PaymentToId.IsEditable, value: City" />
+            </span>
+            <div class="Error" data-bind="visible: $root.Response.Enrollment.PaymentToId.IsEditable() && !City.IsValid()">
+                <span class="tooltip">
+                    <span class="ErrorIcon" />
+                    <span class="TooltipText" data-bind="foreach: !City.ValidationMessages">
+                        <span data-bind="text: $data" /><br />
+                    </span>
+                </span>
+            </div>
+        </li>
+        <li class="form-group">
+            <label for="tbState" class="col-sm-4 control-label">
+                State:
+            </label>
+            <span class="col-sm-8">
+                <input type="text" class="form-control" id="tbState" data-bind="enable: $root.Response.Enrollment.PaymentToId.IsEditable, value: State" />
+            </span>
+            <div class="Error" data-bind="visible: $root.Response.Enrollment.PaymentToId.IsEditable() && !State.IsValid()">
+                <span class="tooltip">
+                    <span class="ErrorIcon" />
+                    <span class="TooltipText" data-bind="foreach: !State.ValidationMessages">
+                        <span data-bind="text: $data" /><br />
+                    </span>
+                </span>
+            </div>
+        </li>
+    </ul>
+</form>
+</div>

@@ -1,0 +1,62 @@
+﻿<script type="text/javascript">
+    $(document).ready(function () {
+        AppState().Application.Model.Steps.Next.BeforeClick = function (wasSuccessful) {
+            var isValid = AppState().Application.Model.Response.IsValidSurvey();
+            console.log("Is valid enrollment survey: " + isValid);
+            wasSuccessful(isValid);
+        };
+        AppState().Application.Model.RefreshBinding();
+    });
+</script>
+<p data-bind="html: Program.Settings.SurveyStepDescription" ></p>
+<div class="card">
+    <ul class="questions FormFields">
+        <li class="form-group">
+            <label>
+                Where did you originally hear about this program?
+            </label>
+            <span class="Error" data-bind="visible: !Response.Enrollment.LeadSourceId.IsValid()">
+                <span class="tooltip">
+                    <span class="ErrorIcon" />
+                    <span class="TooltipText" data-bind="foreach: Response.Enrollment.LeadSourceId.ValidationMessages">
+                        <span data-bind="text: $data" /><br />
+                    </span>
+                </span>
+            </span>
+            <ul class="answers FormFields" data-bind="foreach: Program.LeadSources">
+                <li class="radio">
+                    <label>
+                        <input type="radio" name="rbLeadSources" data-bind="checked: $root.Response.Enrollment.LeadSourceId, value: LeadSourceId" />
+                        <span data-bind="text: LeadSource">Unbound</span>
+                    </label>
+                </li>
+            </ul>
+        </li>
+    </ul>
+    <ul id="PrequalificationQuestions" class="obj_Questions questions FormFields" data-bind="foreach: Program.EnrollmentSurveyQuestions">
+        <li data-bind="attr: { 'data-question': Label }">
+            <label data-bind="text: Label">Testing?</label>
+            <div class="Error" data-bind="visible: !AnswerIsValid()">
+                <span class="tooltip">
+                    <span class="ErrorIcon" />
+                    <span class="TooltipText" data-bind="text: InvalidMessage()" />
+                </span>
+            </div>
+            <ul class="obj_Answers answers FormFields form-group" data-bind="foreach: Answers">
+                <li data-template="true" class="radio">
+                    <input type="radio" data-bind="
+                        value: AnswerId,
+                        attr: {
+                            'data-question-id': QuestionId,
+                            'data-answer-id': AnswerId,
+                            'data-is-valid': IsValidAnswer,
+                            'data-invalid-text': InvalidAnswerText,
+                            'name': 'Question' + QuestionId
+                        },
+                        checked: CheckedValue" />
+                    <label data-bind="text: Label">Unbound</label>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</div>

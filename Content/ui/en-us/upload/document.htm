@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html><html><head runat="server"><title>Add Document</title>
+    <script src="/Scripts/jquery-1.7.1.js"></script>
+    <script src="/Scripts/jquery-ui-1.8.20.js"></script>
+    <script src="/Scripts/knockout-3.0.0.js"></script>
+    <script src="/Scripts/knockout.mapping-latest.js"></script>
+    <script src="/Scripts/jquery.ba-hashchange.min.js" type="text/javascript"></script>
+    <script src="/Scripts/OnlineApplication.Binding.js" type="text/javascript"></script>
+
+    <link href="/Content/Site.css" rel="stylesheet" />
+    <link href="/Content/themes/base/jquery-ui.css" rel="stylesheet" />
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#hidLanguage").val(window.parent.document.AppState().routes.language.val());
+
+            configureValidationExtenders();
+
+            var model = {
+                Program: window.parent.document.AppState().Application.Model.Program,
+                SelectedFile: {
+                    Description: ko.observable(null),
+                    DocumentTypeId: ko.observable(null)
+                }
+            };
+
+            model.SelectedFile.DocumentTypeId.extend({ validation: { required: { message: "Document type is required.", active: function () { return true; } } } });
+
+            $("#frmMain").each(function () {
+                ko.applyBindings(model);
+            });
+
+            $("#btnUpload").click(function () {
+                if ($("#flToUpload").val().trim() == "") return false;
+                if (!model.SelectedFile.DocumentTypeId.IsValid()) return false;
+                return true;
+            });
+
+            $("#btnClose").click(function () {
+                window.parent.jQuery(window.parent.document.AppState().Application.Model.SelectedFile.DialogQuery()).dialog("close");
+                return false;
+            });
+        });
+    </script>
+</head>
+<body>
+    <form enctype="multipart/form-data" method="post" action="/Method/UploadForm/" id="frmMain">
+        <div class="Dialog">
+            <div class="SectionWithLineAtBottom">
+                <span class="Title">Upload a Document</span>
+                <div>Choose a file to upload. The uploader can only upload one file at a time and the file size cannot exceed 10 MB.</div>
+            </div>
+            <div>
+                <span class="ItemTitle">Document Type</span>
+                <div class="Field">
+                    <select name="DocumentTypeId" data-bind="options: Program.DocumentTypes, optionsValue: 'DocumentTypeId', optionsText: 'DocumentTypeName', value: SelectedFile.DocumentTypeId"></select>
+                    <div class="Error" data-bind="visible: !SelectedFile.DocumentTypeId.IsValid()">
+                        <span class="tooltip">
+                            <span class="ErrorIcon" />
+                            <span class="TooltipText" data-bind="foreach: SelectedFile.DocumentTypeId.ValidationMessages">
+                                <span data-bind="text: $data" /><br />
+                            </span>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <span class="ItemTitle">Select a File to Upload</span>
+                <div class="Field">
+                    <input type="file" name="fileToUpload" id="flToUpload" />
+                </div>
+            </div>
+            <div data-bind="text: SelectedFile.Size"></div>
+            <div>
+                <span class="ItemTitle">Description / Comments</span>
+                <div class="Field">
+                    <textarea name="Description" rows="3" data-bind="value: SelectedFile.Description"></textarea>
+                </div>
+            </div>
+            <div>
+                <input id="btnUpload" type="submit" value="Upload" />
+                <input id="btnClose" type="submit" value="Close" />
+                <input id="hidLanguage" type="hidden" name="Language" />
+            </div>
+        </div>
+    </form>
+</body>
+</html>
