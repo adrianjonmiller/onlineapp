@@ -16,8 +16,8 @@
                 Where did you originally hear about this program?
             </label>
             <span class="Error" data-bind="visible: !Response.Enrollment.LeadSourceId.IsValid()">
-                <span class="tooltip">
-                    <span class="ErrorIcon" />
+                <span >
+                    <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: Response.Enrollment.LeadSourceId.ValidationMessages">
                         <span data-bind="text: $data" /><br />
                     </span>
@@ -37,8 +37,8 @@
         <li data-bind="attr: { 'data-question': Label }">
             <label data-bind="text: Label">Testing?</label>
             <div class="Error" data-bind="visible: !AnswerIsValid()">
-                <span class="tooltip">
-                    <span class="ErrorIcon" />
+                <span >
+                    <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="text: InvalidMessage()" />
                 </span>
             </div>

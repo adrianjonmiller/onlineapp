@@ -47,22 +47,25 @@
             height: '22px',
             top: '5px'
         });
+        $("select").select2();
+        $(".data_datepicker").datepicker();
     });
 </script>
+
 <p data-bind="html: Program.Settings.EquipmentStepDescription"></p>
 <div class="card">
-    <form class="QuestionBlockWithSeparatorAtBottom">
+    <form class="QuestionBlockWithSeparatorAtBottom" role="form">
         <ul class="Equipment FormFields form-horizontal">
             <li data-bind="visible: Response.Enrollment.InstallationDate.IsEnabled" class="form-group">
                 <label for="tbInstallationDate" class="col-sm-4 control-label">
                     Installation Date:
                 </label>
                 <span class="Field col-sm-8">
-                    <input type="text" id="tbInstallationDate" data-bind="value: Response.Enrollment.InstallationDate" />
+                    <input type="text" class="form-control data_datepicker" id="tbInstallationDate" data-bind="value: Response.Enrollment.InstallationDate" />
                 </span>
                 <div class="Error" data-bind="visible: !Response.Enrollment.InstallationDate.IsValid()">
-                    <span class="tooltip">
-                        <span class="ErrorIcon" />
+                    <span class="warning col-md-offset-4">
+                        <span class="ion ion-alert-circled orange" />
                         <span class="TooltipText" data-bind="foreach: Response.Enrollment.InstallationDate.ValidationMessages">
                             <span data-bind="text: $data" /><br />
                         </span>
@@ -70,9 +73,9 @@
                 </div>
             </li>
         </ul>
-        <ul class="Equipment form-horizontal" data-bind="foreach: Response.EnrollmentMeasures">
+        <ul class="Equipment FormFields form-horizontal" data-bind="foreach: Response.EnrollmentMeasures">
             <li class="Panel form-group">
-                <div class="PanelTopLine">
+                <div class="PanelTopLine row">
                     <label id="lblEquipmentName" class="BoldLabel col-sm-4 control-label" data-bind="text: MeasureFullName">Unbound</label>
                     <span class="tooltip col-sm-8">
                         <span class="obj_HelpIcon" />
@@ -81,15 +84,17 @@
                     <span class="obj_DeleteButton PanelDeleteButton" data-bind="click: $root.Response.EnrollmentMeasures.RemoveMeasure" />
                 </div>
                 <span class="obj_AlertIcon EquipmentDoNotQualify" />
-                <ul class="FormFields">
-                    <li>
-                        <label>Quantity</label>
-                        <span class="Field">
-                            <input type="number" data-bind="value: PlannedMeasureQty"  />
+
+                <!--- Test -->
+                <ul class="FormFields form-horizontal">
+                    <li class="form-group">
+                        <label class="control-label col-sm-4">Quantity</label>
+                        <span class="Field col-sm-8">
+                            <input type="number" class="form-control" data-bind="value: PlannedMeasureQty"  />
                         </span>
                         <div class="Error" data-bind="visible: !PlannedMeasureQty.IsValid()">
-                            <span class="tooltip">
-                                <span class="ErrorIcon" />
+                            <span class="warning col-md-offset-4">
+                                <span class="ion ion-alert-circled orange" />
                                 <span class="TooltipText" data-bind="foreach: PlannedMeasureQty.ValidationMessages">
                                     <span data-bind="text: $data" /><br />
                                 </span>
@@ -97,22 +102,30 @@
                         </div>
                     </li>
                 </ul>
-                <ul data-bind="visible: EquipmentMakes().length > 0">
-                    <li>
-                        <span>Make</span>
-                        <select data-bind="
-                            options: EquipmentMakes,
-                            value: SelectedMake"></select>
-                        <span data-bind="visible: SelectedMake() != ''">Model</span>
-                        <select data-bind="
-                            visible: SelectedMake() != '',
-                            options: EquipmentModels,
-                            optionsText: 'Model',
-                            optionsValue: 'MeasureEquipmentId',
-                            value: MeasureEquipmentId"></select>
+                <ul class="FormFields form-horizontal" data-bind="visible: EquipmentMakes().length > 0">
+                    <li "form-group">
+                        <div class="row">
+                            <label class="control-label col-sm-4">Make</label>
+                            <span class="col-sm-8">
+                                <select data-bind="
+                                    options: EquipmentMakes,
+                                    value: SelectedMake"></select>
+                            </span>
+                        </div>
+                        <div class="row">
+                            <label class="control-label col-sm-4" data-bind="visible: SelectedMake() != ''">Model</label>
+                            <span class="col-sm-8">
+                                <select data-bind="
+                                    visible: SelectedMake() != '',
+                                    options: EquipmentModels,
+                                    optionsText: 'Model',
+                                    optionsValue: 'MeasureEquipmentId',
+                                    value: MeasureEquipmentId"></select>
+                            </span>
+                        </div>
                     </li>
                 </ul>
-                <ul class="FormFields" data-bind="visible: Properties().length > 0, template: { name: $root.Response.EnrollmentMeasures.TemplateName, foreach: Properties }">
+                <ul class="FormFields form-horizontal" data-bind="visible: Properties().length > 0, template: { name: $root.Response.EnrollmentMeasures.TemplateName, foreach: Properties }">
                     <li>No template selected.</li>
                 </ul>
             </li>
@@ -137,14 +150,14 @@
         </li>
     </script>
     <script type="text/html" id="MeasurePropertyTextBox">
-        <li class="from-group">
+        <li class="form-group">
             <label data-bind="text: PropertyType" class="col-sm-4 control-label">Unbound</label>
             <span class="Field col-sm-8">
-                <input type="text" data-bind="value: InstallationPropertyValue" value="Unbound" />
+                <input type="text" class="form-control" data-bind="value: InstallationPropertyValue" value="Unbound" />
             </span>
             <div class="Error" data-bind="visible: !InstallationPropertyValue.IsValid()">
-                <span class="tooltip">
-                    <span class="ErrorIcon" />
+                <span class="warning">
+                    <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: InstallationPropertyValue.ValidationMessages">
                         <span data-bind="text: $data" /><br />
                     </span>
@@ -162,8 +175,8 @@
                 </select>
             </span>
             <div class="Error" data-bind="visible: !InstallationPropertyValue.IsValid()">
-                <span class="tooltip">
-                    <span class="ErrorIcon" />
+                <span class="warning">
+                    <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: InstallationPropertyValue.ValidationMessages">
                         <span data-bind="text: $data" /><br />
                     </span>
@@ -182,8 +195,8 @@
                 <input type="text" class="DateTextBox" data-bind="jqDatePicker: { maxDate: InstallationMaxValue, minDate: InstallationMinValue, value: InstallationPropertyValue }, value: InstallationPropertyValue" value="Unbound" />
             </span>
             <div class="Error" data-bind="visible: !InstallationPropertyValue.IsValid()">
-                <span class="tooltip">
-                    <span class="ErrorIcon" />
+                <span class="warning">
+                    <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: InstallationPropertyValue.ValidationMessages">
                         <span data-bind="text: $data" /><br />
                     </span>
@@ -198,8 +211,8 @@
                 <input type="checkbox" value="true" data-bind="checked: InstallationPropertyValue" />
             </span>
             <div class="Error" data-bind="visible: !InstallationPropertyValue.IsValid()">
-                <span class="tooltip">
-                    <span class="ErrorIcon" />
+                <span class="warning">
+                    <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: InstallationPropertyValue.ValidationMessages">
                         <span data-bind="text: $data" /><br />
                     </span>
@@ -216,8 +229,8 @@
                 </ul>
             </div>
             <div class="Error" data-bind="visible: !InstallationPropertyValue.IsValid()">
-                <span class="tooltip">
-                    <span class="ErrorIcon" />
+                <span class="warning">
+                    <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: InstallationPropertyValue.ValidationMessages">
                         <span data-bind="text: $data" /><br />
                     </span>
@@ -234,8 +247,8 @@
                 </ul>
             </div>
             <div class="Error" data-bind="visible: !InstallationPropertyValue.IsValid()">
-                <span class="tooltip">
-                    <span class="ErrorIcon" />
+                <span class="warning">
+                    <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: InstallationPropertyValue.ValidationMessages">
                         <span data-bind="text: $data" /><br />
                     </span>
@@ -250,8 +263,8 @@
                 <input type="number" data-bind="value: InstallationPropertyValue" />
             </span>
             <div class="Error" data-bind="visible: !InstallationPropertyValue.IsValid()">
-                <span class="tooltip">
-                    <span class="ErrorIcon" />
+                <span class="warning">
+                    <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: InstallationPropertyValue.ValidationMessages">
                         <span data-bind="text: $data" /><br />
                     </span>

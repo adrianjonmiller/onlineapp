@@ -13,8 +13,8 @@
     <div class="form-group">
         <span>Indicate who is completing this application:</span>
         <div class="Error" data-bind="visible: !Response.Enrollment.EnrollmentWhoIsApplyingId.IsValid()">
-            <span class="tooltip">
-                <span class="ErrorIcon" />
+            <span >
+                <span class="ion ion-alert-circled orange" />
                 <span class="TooltipText" data-bind="foreach: Response.Enrollment.EnrollmentWhoIsApplyingId.ValidationMessages">
                     <span data-bind="text: $data" /><br />
                 </span>
@@ -34,9 +34,10 @@
       <div>
         <input type="text" style="width: 300px;" class="form-control" id="txtAccountNumber" placeholder="Account Number (No spaces or dashes)" data-bind="value: Response.Enrollment.ServiceAccountNo" />
       </div>
-      <div class="Error" data-bind="visible: Response.Enrollment.ServiceAccountNo.IsValid() == false">
-        <span class="tooltip">
-          <span class="ErrorIcon"></span>
+      <div class="Error" data-bind="visible: true">
+        <!-- Response.Enrollment.ServiceAccountNo.IsValid() == false -->
+        <span >
+          <span class="ion ion-alert-circled orange"></span>
           <span class="TooltipText" data-bind="foreach: Response.Enrollment.ServiceAccountNo.ValidationMessages"></span>
           <span data-bind="text: $data" ></span><br />
           </span>
@@ -48,8 +49,8 @@
           <li data-bind="attr: { 'data-question': Label }">
               <label data-bind="text: Label">Testing?</label>
               <div class="Error" data-bind="visible: !AnswerIsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+                  <span >
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText">
                           <span data-bind="text: InvalidMessage()" /><br />
                       </span>

@@ -7,6 +7,10 @@
         };
         AppState().Application.Model.RefreshBinding();
     });
+$(document).ready(function() { 
+    $("select").select2();
+    $(".data_datepicker").datepicker();
+});
 </script>
 <p data-bind="html: Program.Settings.PayeeStepDescription"></p>
 <div class="card">
@@ -31,8 +35,8 @@
                 <span data-bind="text: Response.Enrollment.PayeeName.Prepopulated, visible: !Response.Enrollment.PaymentToId.IsEditable()">Unbound</span>
             </span>
             <span class="Error" data-bind="visible: !Response.Enrollment.PayeeName.IsValid()">
-                <span class="tooltip">
-                    <span class="ErrorIcon" />
+                <span class="warning">
+                    <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: Response.Enrollment.PayeeName.ValidationMessages">
                         <span data-bind="text: $data" /><br />
                     </span>
@@ -56,8 +60,8 @@
                 <span data-bind="text: Response.Enrollment.PayeePhoneNumber.Prepopulated, visible: !Response.Enrollment.PaymentToId.IsEditable()">Unbound</span>
             </span>
             <span class="Error" data-bind="visible: !Response.Enrollment.PayeePhoneNumber.IsValid()">
-                <span class="tooltip">
-                    <span class="ErrorIcon" />
+                <span class="warning">
+                    <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: Response.Enrollment.PayeePhoneNumber.ValidationMessages">
                         <span data-bind="text: $data" /><br />
                     </span>
@@ -69,11 +73,11 @@
                 Tax Status:
             </label>
             <span class="col-sm-8">
-                <select id="sbTaxStatus" class="form-control" data-bind="options: Program.TaxStatusTypes, optionsValue: 'TaxStatusId', optionsText: 'Description', value: Response.Enrollment.PayeeTaxStatusId"></select>
+                <select id="sbTaxStatus" data-bind="options: Program.TaxStatusTypes, optionsValue: 'TaxStatusId', optionsText: 'Description', value: Response.Enrollment.PayeeTaxStatusId"></select>
             </span>
             <span class="Error" data-bind="visible: !Response.Enrollment.PayeeTaxStatusId.IsValid()">
-                <span class="tooltip">
-                    <span class="ErrorIcon" />
+                <span class="warning">
+                    <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: Response.Enrollment.PayeeTaxStatusId.ValidationMessages">
                         <span data-bind="text: $data" /><br />
                     </span>
@@ -89,8 +93,8 @@
                 <label data-bind="text: Description"></label>
             </span>
             <span class="Error" data-bind="visible: !Response.Enrollment.PayeeTaxIdTypeId.IsValid()">
-                <span class="tooltip">
-                    <span class="ErrorIcon" />
+                <span class="warning">
+                    <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: Response.Enrollment.PayeeTaxIdTypeId.ValidationMessages">
                         <span data-bind="text: $data" /><br />
                     </span>
@@ -105,8 +109,8 @@
                 <input type="text" class="form-control" id="tbTaxIDNumber" data-bind="value: Response.Enrollment.PayeeTaxIdSSN" />
             </span>
             <span class="Error" data-bind="visible: !Response.Enrollment.PayeeTaxIdSSN.IsValid()">
-                <span class="tooltip">
-                    <span class="ErrorIcon" />
+                <span class="warning">
+                    <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: Response.Enrollment.PayeeTaxIdSSN.ValidationMessages">
                         <span data-bind="text: $data" /><br />
                     </span>
@@ -142,8 +146,8 @@
                 <input type="text" class="form-control" id="tbPOBox" data-bind="enable: $root.Response.Enrollment.PaymentToId.IsEditable, value: POBox" />
             </span>
             <div class="Error" data-bind="visible: $root.Response.Enrollment.PaymentToId.IsEditable() && !POBox.IsValid()">
-                <span class="tooltip">
-                    <span class="ErrorIcon" />
+                <span class="warning">
+                    <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: !POBox.ValidationMessages">
                         <span data-bind="text: $data" /><br />
                     </span>
@@ -158,8 +162,8 @@
                 <input type="text" class="form-control" id="tbStreet" data-bind="enable: $root.Response.Enrollment.PaymentToId.IsEditable, value: Street1" />
             </span>
             <div class="Error" data-bind="visible: $root.Response.Enrollment.PaymentToId.IsEditable() && !Street1.IsValid()">
-                <span class="tooltip">
-                    <span class="ErrorIcon" />
+                <span class="warning">
+                    <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: !Street1.ValidationMessages">
                         <span data-bind="text: $data" /><br />
                     </span>
@@ -182,8 +186,8 @@
                 <input type="text" class="form-control" id="tbZIP" data-bind="enable: $root.Response.Enrollment.PaymentToId.IsEditable, value: PostalCode" />
             </span>
             <div class="Error" data-bind="visible: $root.Response.Enrollment.PaymentToId.IsEditable() && !PostalCode.IsValid()">
-                <span class="tooltip">
-                    <span class="ErrorIcon" />
+                <span class="warning">
+                    <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: !PostalCode.ValidationMessages">
                         <span data-bind="text: $data" /><br />
                     </span>
@@ -198,8 +202,8 @@
                 <input type="text" class="form-control" id="tbCity" data-bind="enable: $root.Response.Enrollment.PaymentToId.IsEditable, value: City" />
             </span>
             <div class="Error" data-bind="visible: $root.Response.Enrollment.PaymentToId.IsEditable() && !City.IsValid()">
-                <span class="tooltip">
-                    <span class="ErrorIcon" />
+                <span class="warning">
+                    <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: !City.ValidationMessages">
                         <span data-bind="text: $data" /><br />
                     </span>
@@ -214,8 +218,8 @@
                 <input type="text" class="form-control" id="tbState" data-bind="enable: $root.Response.Enrollment.PaymentToId.IsEditable, value: State" />
             </span>
             <div class="Error" data-bind="visible: $root.Response.Enrollment.PaymentToId.IsEditable() && !State.IsValid()">
-                <span class="tooltip">
-                    <span class="ErrorIcon" />
+                <span class="warning">
+                    <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: !State.ValidationMessages">
                         <span data-bind="text: $data" /><br />
                     </span>

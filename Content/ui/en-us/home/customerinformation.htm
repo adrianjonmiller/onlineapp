@@ -6,6 +6,9 @@
             return wasSuccessful(isValid);
         };
         AppState().Application.Model.RefreshBinding();
+
+        $("select").select2();
+        $(".data_datepicker").datepicker();
     });
 </script>
 <div class="card">
@@ -15,15 +18,17 @@
 
       <ul class="FormFields form-horizontal">
           <li class="form-group">
+              <div class="row">
               <label for="lbAccountNumber" class="col-sm-4 control-label">
                   Account Number:
               </label>
               <span class="Field col-sm-8">
                   <label id="lbAccountNumber" class="DataLabel" data-bind="text: Response.Enrollment.ServiceAccountNo"></label>
               </span>
+              </div>
               <div class="Error" data-bind="visible: !Response.Enrollment.ServiceAccountNo.Matched.IsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+                  <span class="warning col-md-offset-4">
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText" data-bind="foreach: Response.Enrollment.ServiceAccountNo.Matched.ValidationMessages">
                           <span data-bind="text: $data" /><br />
                       </span>
@@ -38,8 +43,8 @@
                   <input type="text" class="form-control" data-bind="value: Response.Enrollment.AccountName"  />
               </span>
               <div class="Error" data-bind="visible: !Response.Enrollment.AccountName.IsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+                  <span class="warning col-md-offset-4">
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText" data-bind="foreach: Response.Enrollment.AccountName.ValidationMessages">
                           <span data-bind="text: $data" /><br />
                       </span>
@@ -54,8 +59,8 @@
                   <input type="text" class="form-control" id="tbApplicantFirstName" data-bind="value: Response.Enrollment.CustomerFirstName"/>
               </span>
               <div class="Error" data-bind="visible: !Response.Enrollment.CustomerFirstName.IsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+                  <span class="warning col-md-offset-4">
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText" data-bind="foreach: Response.Enrollment.CustomerFirstName.ValidationMessages">
                           <span data-bind="text: $data" /><br />
                       </span>
@@ -70,8 +75,8 @@
                   <input type="text" class="form-control" id="tbApplicantLastName" data-bind="value: Response.Enrollment.CustomerLastName" />
               </span>
               <div class="Error" data-bind="visible: !Response.Enrollment.CustomerLastName.IsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+                  <span class="warning col-md-offset-4">
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText" data-bind="foreach: Response.Enrollment.CustomerLastName.ValidationMessages">
                           <span data-bind="text: $data" /><br />
                       </span>
@@ -86,8 +91,8 @@
                   <input type="text" class="form-control" id="tbPrimaryPhone" data-bind="value: Response.Enrollment.HomePhone" />
               </span>
               <div class="Error" data-bind="visible: !Response.Enrollment.HomePhone.IsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+                  <span class="warning col-md-offset-4">
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText" data-bind="foreach: Response.Enrollment.HomePhone.ValidationMessages">
                           <span data-bind="text: $data" /><br />
                       </span>
@@ -102,8 +107,8 @@
                   <input type="text" class="form-control" id="tbAltPhone" data-bind="value: Response.Enrollment.AltPhone" />
               </span>
               <div class="Error" data-bind="visible: !Response.Enrollment.AltPhone.IsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+                  <span class="warning col-md-offset-4">
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText" data-bind="foreach: Response.Enrollment.AltPhone.ValidationMessages">
                           <span data-bind="text: $data" /><br />
                       </span>
@@ -117,9 +122,9 @@
               <span class="Field col-sm-8">
                   <input type="text" class="form-control" id="tbFax" data-bind="value: Response.Enrollment.FaxNumber" />
               </span>
-              <div class="Error" data-bind="visible: !Response.Enrollment.FaxNumber.IsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+              <div class="Error" data-bind="visible: true">
+                  <span class="warning col-md-offset-4">
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText" data-bind="foreach: Response.Enrollment.FaxNumber.ValidationMessages">
                           <span data-bind="text: $data" /><br />
                       </span>
@@ -134,8 +139,8 @@
                   <input type="text" class="form-control" id="tbEmail" data-bind="value: Response.Enrollment.CustomerEmail" />
               </span>
               <div class="Error" data-bind="visible: !Response.Enrollment.CustomerEmail.IsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+                  <span class="warning col-md-offset-4">
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText" data-bind="foreach: Response.Enrollment.CustomerEmail.ValidationMessages">
                           <span data-bind="text: $data" /><br />
                       </span>
@@ -155,8 +160,8 @@
                   <input type="text" class="form-control" id="tbStreet" data-bind="value: Response.ServiceAddress.Street1" />
               </span>
               <div class="Error" data-bind="visible: !Response.ServiceAddress.Street1.IsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+                  <span class="warning col-md-offset-4">
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText" data-bind="foreach: Response.ServiceAddress.Street1.ValidationMessages">
                           <span data-bind="text: $data" /><br />
                       </span>
@@ -179,8 +184,8 @@
                   <input type="text" class="form-control" id="tbZIP" data-bind="value: Response.ServiceAddress.PostalCode" />
               </span>
               <div class="Error" data-bind="visible: !Response.ServiceAddress.PostalCode.IsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+                  <span class="warning col-md-offset-4">
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText" data-bind="foreach: Response.ServiceAddress.PostalCode.ValidationMessages">
                           <span data-bind="text: $data" /><br />
                       </span>
@@ -195,8 +200,8 @@
                   <input type="text" class="form-control" id="tbCity" tabindex="-1" data-bind="value: Response.ServiceAddress.City" />
               </span>
               <div class="Error" data-bind="visible: !Response.ServiceAddress.City.IsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+                  <span class="warning col-md-offset-4">
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText" data-bind="foreach: Response.ServiceAddress.City.ValidationMessages">
                           <span data-bind="text: $data" /><br />
                       </span>
@@ -211,8 +216,8 @@
                   <input type="text" class="form-control" id="tbState" tabindex="-1" data-bind="value: Response.ServiceAddress.State" />
               </span>
               <div class="Error" data-bind="visible: !Response.ServiceAddress.State.IsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+                  <span class="warning col-md-offset-4">
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText" data-bind="foreach: Response.ServiceAddress.State.ValidationMessages">
                           <span data-bind="text: $data" /><br />
                       </span>
@@ -255,8 +260,8 @@
                     <input type="text" class="form-control" id="tbMailingPOBox" data-bind="value: Response.MailingAddress.POBox" />
                 </span>
                 <div class="Error" data-bind="visible: !Response.MailingAddress.POBox.IsValid()">
-                    <span class="tooltip">
-                        <span class="ErrorIcon" />
+                    <span class="warning col-md-offset-4">
+                        <span class="ion ion-alert-circled orange" />
                         <span class="TooltipText" data-bind="foreach: Response.MailingAddress.POBox.ValidationMessages">
                             <span data-bind="text: $data" /><br />
                         </span>
@@ -283,8 +288,8 @@
                     <input type="text" class="form-control" id="tbMailingStreet" data-bind="value: Response.MailingAddress.Street1" />
                 </span>
                 <div class="Error" data-bind="visible: !Response.MailingAddress.Street1.IsValid()">
-                    <span class="tooltip">
-                        <span class="ErrorIcon" />
+                    <span class="warning col-md-offset-4">
+                        <span class="ion ion-alert-circled orange" />
                         <span class="TooltipText" data-bind="foreach: Response.MailingAddress.Street1.ValidationMessages">
                             <span data-bind="text: $data" /><br />
                         </span>
@@ -324,8 +329,8 @@
                     <input type="text" class="form-control" id="tbMailingZIP" data-bind="value: Response.MailingAddress.PostalCode" />
                 </span>
                 <div class="Error" data-bind="visible: !Response.MailingAddress.PostalCode.IsValid()">
-                    <span class="tooltip">
-                        <span class="ErrorIcon" />
+                    <span class="warning col-md-offset-4">
+                        <span class="ion ion-alert-circled orange" />
                         <span class="TooltipText" data-bind="foreach: Response.MailingAddress.PostalCode.ValidationMessages">
                             <span data-bind="text: $data" /><br />
                         </span>
@@ -340,8 +345,8 @@
                     <input type="text" class="form-control" id="tbMailingCity" data-bind="value: Response.MailingAddress.City" />
                 </span>
                 <div class="Error" data-bind="visible: !Response.MailingAddress.City.IsValid()">
-                    <span class="tooltip">
-                        <span class="ErrorIcon" />
+                    <span class="warning col-md-offset-4">
+                        <span class="ion ion-alert-circled orange" />
                         <span class="TooltipText" data-bind="foreach: Response.MailingAddress.City.ValidationMessages">
                             <span data-bind="text: $data" /><br />
                         </span>
@@ -356,8 +361,8 @@
                     <input type="text" class="form-control" id="tbMailingState" data-bind="value: Response.MailingAddress.State" />
                 </span>
                 <div class="Error" data-bind="visible: !Response.MailingAddress.State.IsValid()">
-                    <span class="tooltip">
-                        <span class="ErrorIcon" />
+                    <span class="warning col-md-offset-4">
+                        <span class="ion ion-alert-circled orange" />
                         <span class="TooltipText" data-bind="foreach: Response.MailingAddress.State.ValidationMessages">
                             <span data-bind="text: $data" /><br />
                         </span>
@@ -372,18 +377,20 @@
       </h3>
       <ul class="FormFields form-horizontal">
           <li class="form-group" data-bind="visible: Response.Enrollment.IsAirConditioned.IsEnabled">
-              <label for="rbAirConditioned" class="col-sm-4 control-label">
-                  Air Conditioned:
-              </label>
-              <span class="Field col-sm-8">
-                  <input type="radio" name="rbAirConditioned" data-bind="checkedValue: true, checked: Response.Enrollment.IsAirConditioned" />
-                  Yes
-                  <input type="radio" name="rbAirConditioned" data-bind="checkedValue: false, checked: Response.Enrollment.IsAirConditioned" />
-                  No
-              </span>
+              <div class="row">
+                <label for="rbAirConditioned" class="col-sm-4 control-label">
+                    Air Conditioned:
+                </label>
+                <span class="Field col-sm-8">
+                    <input type="radio" name="rbAirConditioned" data-bind="checkedValue: true, checked: Response.Enrollment.IsAirConditioned" />
+                    Yes
+                    <input type="radio" name="rbAirConditioned" data-bind="checkedValue: false, checked: Response.Enrollment.IsAirConditioned" />
+                    No
+                </span>
+              </div>
               <div class="Error" data-bind="visible: !Response.Enrollment.IsAirConditioned.IsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+                  <span class="warning col-md-offset-4">
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText" class="form-control" data-bind="foreach: Response.Enrollment.IsAirConditioned.ValidationMessages">
                           <span data-bind="text: $data" /><br />
                       </span>
@@ -398,8 +405,8 @@
                   <input type="text" class="form-control" id="tbAirConditioned" data-bind="value: Response.Enrollment.TotalSqFtAirConditioned" />
               </span>
               <div class="Error" data-bind="visible: !Response.Enrollment.TotalSqFtAirConditioned.IsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+                  <span class="warning col-md-offset-4">
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText" data-bind="foreach: Response.Enrollment.TotalSqFtAirConditioned.ValidationMessages">
                           <span data-bind="text: $data" /><br />
                       </span>
@@ -417,8 +424,8 @@
                   No
               </span>
               <div class="Error" data-bind="visible: !Response.Enrollment.AuditPerformed.IsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+                  <span class="warning col-md-offset-4">
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText" data-bind="foreach: Response.Enrollment.AuditPerformed.ValidationMessages">
                           <span data-bind="text: $data" /><br />
                       </span>
@@ -430,11 +437,11 @@
                   Available Date for Closing:
               </label>
               <span class="Field col-sm-8">
-                  <input type="text" class="form-control" data-bind="value: Response.Enrollment.AvailableDateForClosing" />
+                  <input type="text" class="form-control data_datepicker" data-bind="value: Response.Enrollment.AvailableDateForClosing" />
               </span>
               <div class="Error" data-bind="visible: !Response.Enrollment.AvailableDateForClosing.IsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+                  <span class="warning col-md-offset-4">
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText" data-bind="foreach: Response.Enrollment.AvailableDateForClosing.ValidationMessages">
                           <span data-bind="text: $data" /><br />
                       </span>
@@ -446,11 +453,11 @@
                   Available Date for Inspection:
               </label>
               <span class="Field col-sm-8">
-                  <input type="text" class="form-control" data-bind="value: Response.Enrollment.AvailableDateForInspection" />
+                  <input type="text" class="form-control data_datepicker" data-bind="value: Response.Enrollment.AvailableDateForInspection" />
               </span>
               <div class="Error" data-bind="visible: !Response.Enrollment.AvailableDateForInspection.IsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+                  <span class="warning col-md-offset-4">
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText" data-bind="foreach: Response.Enrollment.AvailableDateForInspection.ValidationMessages">
                           <span data-bind="text: $data" /><br />
                       </span>
@@ -468,8 +475,8 @@
                   No
               </span>
               <div class="Error" data-bind="visible: !Response.Enrollment.BenchmarkCompleted.IsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+                  <span class="warning col-md-offset-4">
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText" data-bind="foreach: Response.Enrollment.BenchmarkCompleted.ValidationMessages">
                           <span data-bind="text: $data" /><br />
                       </span>
@@ -487,8 +494,8 @@
                   </span>
               </span>
               <div class="Error" data-bind="visible: !Response.Enrollment.BenchmarkScore.IsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+                  <span class="warning col-md-offset-4">
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText" data-bind="foreach: Response.Enrollment.BenchmarkScore.ValidationMessages">
                           <span data-bind="text: $data" /><br />
                       </span>
@@ -503,8 +510,8 @@
                   <input type="text" class="form-control" data-bind="value: Response.Enrollment.BuildingPermitNumber" />
               </span>
               <div class="Error" data-bind="visible: !Response.Enrollment.BuildingPermitNumber.IsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+                  <span class="warning col-md-offset-4">
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText" data-bind="foreach: Response.Enrollment.BuildingPermitNumber.ValidationMessages">
                           <span data-bind="text: $data" /><br />
                       </span>
@@ -512,15 +519,17 @@
               </div>
           </li>
           <li class="form-group" data-bind="visible: Response.Enrollment.BuildingTypeId.IsEnabled">
-              <label for="sbBuildingType" class="col-sm-4 control-label">
-                  Building Type:
-              </label>
-              <span class="Field col-sm-8">
-                  <select data-bind="options: Program.BuildingTypes, optionsText: 'BuildingTypeName', optionsValue: 'BuildingTypeId', value: Response.Enrollment.BuildingTypeId"></select>
-              </span>
+              <div class="row">
+                <label for="sbBuildingType" class="col-sm-4 control-label">
+                    Building Type:
+                </label>
+                <span class="Field col-sm-8">
+                    <select data-bind="options: Program.BuildingTypes, optionsText: 'BuildingTypeName', optionsValue: 'BuildingTypeId', value: Response.Enrollment.BuildingTypeId"></select>
+                </span>
+              </div>
               <div class="Error" data-bind="visible: !Response.Enrollment.BuildingTypeId.IsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+                  <span class="warning col-md-offset-4">
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText" data-bind="foreach: Response.Enrollment.BuildingTypeId.ValidationMessages">
                           <span data-bind="text: $data" /><br />
                       </span>
@@ -538,8 +547,8 @@
                   Existing
               </span>
               <div class="Error" data-bind="visible: !Response.Enrollment.IsExisting.IsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+                  <span class="warning col-md-offset-4">
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText" data-bind="foreach: Response.Enrollment.IsExisting.ValidationMessages">
                           <span data-bind="text: $data" /><br />
                       </span>
@@ -554,8 +563,8 @@
                   <input type="text" class="form-control" id="tbNumberBedrooms" data-bind="value: Response.Enrollment.NumberOfBedrooms" />
               </span>
               <div class="Error" data-bind="visible: !Response.Enrollment.NumberOfBedrooms.IsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+                  <span class="warning col-md-offset-4">
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText" data-bind="foreach: Response.Enrollment.NumberOfBedrooms.ValidationMessages">
                           <span data-bind="text: $data" /><br />
                       </span>
@@ -570,8 +579,8 @@
                   <input type="text" id="tbNumberEmployees" data-bind="value: Response.Enrollment.NumberOfEmployees" />
               </span>
               <div class="Error" data-bind="visible: !Response.Enrollment.NumberOfEmployees.IsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+                  <span class="warning col-md-offset-4">
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText" data-bind="foreach: Response.Enrollment.NumberOfEmployees.ValidationMessages">
                           <span data-bind="text: $data" /><br />
                       </span>
@@ -586,8 +595,8 @@
                   <input type="text" class="form-control" id="tbNumberOccupants" data-bind="value: Response.Enrollment.NumberOfOccupants" />
               </span>
               <div class="Error" data-bind="visible: !Response.Enrollment.NumberOfOccupants.IsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+                  <span class="warning col-md-offset-4">
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText" data-bind="foreach: Response.Enrollment.NumberOfOccupants.ValidationMessages">
                           <span data-bind="text: $data" /><br />
                       </span>
@@ -602,8 +611,8 @@
                   <select data-bind="options: Program.OccupancyStatuses, optionsText: 'OccupancyStatus', optionsValue: 'OccupancyStatusId', value: Response.Enrollment.OccupancyStatusId"></select>
               </span>
               <div class="Error" data-bind="visible: !Response.Enrollment.OccupancyStatusId.IsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+                  <span class="warning col-md-offset-4">
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText" data-bind="foreach: Response.Enrollment.OccupancyStatusId.ValidationMessages">
                           <span data-bind="text: $data" /><br />
                       </span>
@@ -618,8 +627,8 @@
                   <input type="text" class="form-control" id="tbMobileHomePark" data-bind="value: Response.Enrollment.ParkName" />
               </span>
               <div class="Error" data-bind="visible: !Response.Enrollment.ParkName.IsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+                  <span class="warning col-md-offset-4">
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText" data-bind="foreach: Response.Enrollment.ParkName.ValidationMessages">
                           <span data-bind="text: $data" /><br />
                       </span>
@@ -631,11 +640,11 @@
                   Project Type:
               </label>
               <span class="Field col-sm-8">
-                  <select data-bind="options: Program.ProjectTypes, optionsText: 'ProjectTypeName', optionsValue: 'ProjectTypeId', value: Response.Enrollment.ProjectTypeId"></select>
+                  <select id="project_type" data-bind="options: Program.ProjectTypes, optionsText: 'ProjectTypeName', optionsValue: 'ProjectTypeId', value: Response.Enrollment.ProjectTypeId"></select>
               </span>
               <div class="Error" data-bind="visible: !Response.Enrollment.ProjectTypeId.IsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+                  <span class="warning col-md-offset-4">
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText" data-bind="foreach: Response.Enrollment.ProjectTypeId.ValidationMessages">
                           <span data-bind="text: $data" /><br />
                       </span>
@@ -650,8 +659,8 @@
                   <input type="text" class="form-control" data-bind="value: Response.Enrollment.SiteBlockNumber" />
               </span>
               <div class="Error" data-bind="visible: !Response.Enrollment.SiteBlockNumber.IsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+                  <span class="warning col-md-offset-4">
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText" data-bind="foreach: Response.Enrollment.SiteBlockNumber.ValidationMessages">
                           <span data-bind="text: $data" /><br />
                       </span>
@@ -666,8 +675,8 @@
                   <input type="text" class="form-control" data-bind="value: Response.Enrollment.SiteLotNumber" />
               </span>
               <div class="Error" data-bind="visible: !Response.Enrollment.SiteLotNumber.IsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+                  <span class="warning col-md-offset-4">
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText" data-bind="foreach: Response.Enrollment.SiteLotNumber.ValidationMessages">
                           <span data-bind="text: $data" /><br />
                       </span>
@@ -682,8 +691,8 @@
                   <input type="text" class="form-control" data-bind="value: Response.Enrollment.SubdivisionName" />
               </span>
               <div class="Error" data-bind="visible: !Response.Enrollment.SubdivisionName.IsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+                  <span class="warning col-md-offset-4">
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText" data-bind="foreach: Response.Enrollment.SubdivisionName.ValidationMessages">
                           <span data-bind="text: $data" /><br />
                       </span>
@@ -698,8 +707,8 @@
                   <input type="text" class="form-control" id="tbSquareFootage" data-bind="value: Response.Enrollment.TotalSqFtLivingSpace" />
               </span>
               <div class="Error" data-bind="visible: !Response.Enrollment.TotalSqFtLivingSpace.IsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+                  <span class="warning col-md-offset-4">
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText" data-bind="foreach: Response.Enrollment.TotalSqFtLivingSpace.ValidationMessages">
                           <span data-bind="text: $data" /><br />
                       </span>
@@ -714,8 +723,8 @@
                   <input type="text" class="form-control" id="tbWeeklyHrs" data-bind="value: Response.Enrollment.WeeklyHoursOfOperation" />
               </span>
               <div class="Error" data-bind="visible: !Response.Enrollment.WeeklyHoursOfOperation.IsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+                  <span class="warning col-md-offset-4">
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText" data-bind="foreach: Response.Enrollment.WeeklyHoursOfOperation.ValidationMessages">
                           <span data-bind="text: $data" /><br />
                       </span>
@@ -730,8 +739,8 @@
                   <input type="text" class="form-control" id="tbYearBuilt" data-bind="value: Response.Enrollment.YearBuilt" />
               </span>
               <div class="Error" data-bind="visible: !Response.Enrollment.YearBuilt.IsValid()">
-                  <span class="tooltip">
-                      <span class="ErrorIcon" />
+                  <span class="warning col-md-offset-4">
+                      <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText" data-bind="foreach: Response.Enrollment.YearBuilt.ValidationMessages">
                           <span data-bind="text: $data" /><br />
                       </span>

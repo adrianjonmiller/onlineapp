@@ -120,8 +120,8 @@
             <div class="Field">
                 <select name="DocumentTypeId" data-bind="options: Program.DocumentTypes, optionsValue: 'DocumentTypeId', optionsText: 'DocumentTypeName', value: SelectedFile.DocumentTypeId"></select>
                 <div class="Error" data-bind="visible: !SelectedFile.DocumentTypeId.IsValid()">
-                    <span class="tooltip">
-                        <span class="ErrorIcon" />
+                    <span class="warning">
+                        <span class="ion ion-alert-circled orange" />
                         <span class="TooltipText" data-bind="foreach: SelectedFile.DocumentTypeId.ValidationMessages">
                             <span data-bind="text: $data" /><br />
                         </span>
@@ -134,24 +134,24 @@
             <div class="Field">
                 <input type="file" id="fileInput" name="fileToUpload" class="obj_FileToUpload" />
                 <div class="Error" data-bind="visible: !SelectedFile.Current.IsValid()">
-                    <span class="tooltip">
-                        <span class="ErrorIcon" />
+                    <span class="warning">
+                        <span class="ion ion-alert-circled orange" />
                         <span class="TooltipText" data-bind="foreach: SelectedFile.Current.ValidationMessages">
                             <span data-bind="text: $data" /><br />
                         </span>
                     </span>
                 </div>
                 <div class="Error" data-bind="visible: !SelectedFile.UploadFailed.IsValid()">
-                    <span class="tooltip">
-                        <span class="ErrorIcon" />
+                    <span class="warning">
+                        <span class="ion ion-alert-circled orange" />
                         <span class="TooltipText" data-bind="foreach: SelectedFile.UploadFailed.ValidationMessages">
                             <span data-bind="text: $data" /><br />
                         </span>
                     </span>
                 </div>
                 <div class="Error" data-bind="visible: !SelectedFile.UploadCanceled.IsValid()">
-                    <span class="tooltip">
-                        <span class="ErrorIcon" />
+                    <span class="warning">
+                        <span class="ion ion-alert-circled orange" />
                         <span class="TooltipText" data-bind="foreach: SelectedFile.UploadCanceled.ValidationMessages">
                             <span data-bind="text: $data" /><br />
                         </span>

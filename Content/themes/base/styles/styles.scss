@@ -1,4 +1,5 @@
 $pad: 18px;
+$orange: orange;
 
 body {
 	background-color: #fafafa;
@@ -20,4 +21,29 @@ body {
 		list-style: none;
 		margin-left: 0;
 	}
+}
+
+.warning {
+	padding-left: 1em;
+}
+.orange { color: $orange; }
+
+span.ReviewLine {
+    display: block;
+    margin-left: 20px;
+}
+
+span.ReviewHeaderLine {
+    margin-top: 20px;
+    display: block;
+}
+
+span.ReviewInsideHeaderLine {
+    margin-top: 10px;
+    margin-left: 20px;
+    display: block;
+}
+
+div.ReviewList {
+    margin-bottom: 20px;
 }

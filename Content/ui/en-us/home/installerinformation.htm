@@ -50,22 +50,28 @@
                 }
             });
 
-            if (AppState().Application.Model.Program.Settings.InstallerOptions.AllowSelectionExistingContact) {
-                $("#sbContactName").combobox().on("comboboxselected", function (event, item) {
-                    if (item.itemValue == null) {
-                        AppState().Application.Model.Response.Contractor.ContractorEmployee.ContractorEmployeeId("");
-                        AppState().Application.Model.Response.Contractor.ContractorEmployee.LastName(item.value);
-                    } else {
-                        AppState().Application.Model.Response.Contractor.ContractorEmployee.ContractorEmployeeId(item.itemValue);
-                    }
-                });
-            }
-        } else {
-            $("#tbCompany").change(function () {
-                AppState().Application.Model.Response.Contractor.ContractorName($(this).val());
-            });
+        //     if (AppState().Application.Model.Program.Settings.InstallerOptions.AllowSelectionExistingContact) {
+        //         $("#sbContactName").combobox().on("comboboxselected", function (event, item) {
+        //             if (item.itemValue == null) {
+        //                 AppState().Application.Model.Response.Contractor.ContractorEmployee.ContractorEmployeeId("");
+        //                 AppState().Application.Model.Response.Contractor.ContractorEmployee.LastName(item.value);
+        //             } else {
+        //                 AppState().Application.Model.Response.Contractor.ContractorEmployee.ContractorEmployeeId(item.itemValue);
+        //             }
+        //         });
+        //     }
+        // } else {
+        //     $("#tbCompany").change(function () {
+        //         AppState().Application.Model.Response.Contractor.ContractorName($(this).val());
+        //     });
         }
     });
+
+$(document).ready(function() { 
+    $("select").select2();
+    $(".data_datepicker").datepicker();
+});
+
 </script>
 <p data-bind="html: Program.Settings.InstallerInformationStepDescription"></p>
 <div class="card">
@@ -87,19 +93,19 @@
                 Company:
             </label>
             <span class="col-sm-8">
-                <input type="text" id="tbCompany" class="ui-widget ui-widget-content ui-autocomplete-input ui-combobox-input ui-corner-all" />
+                <input type="text" id="tbCompany" class="form-control ui-widget ui-widget-content ui-autocomplete-input ui-combobox-input ui-corner-all" />
             </span>
             <span class="Error" data-bind="visible: !Response.Contractor.ContractorId.IsValid()">
-                <span class="tooltip">
-                    <span class="ErrorIcon" />
+                <span class="warning col-md-offset-4">
+                    <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: Response.Contractor.ContractorId.ValidationMessages">
                         <span data-bind="text: $data" /><br />
                     </span>
                 </span>
             </span>
             <span class="Error" data-bind="visible: !Response.Contractor.ContractorName.IsValid()">
-                <span class="tooltip">
-                    <span class="ErrorIcon" />
+                <span class="warning col-md-offset-4">
+                    <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: Response.Contractor.ContractorName.ValidationMessages">
                         <span data-bind="text: $data" /><br />
                     </span>
@@ -118,21 +124,21 @@
                     value: Response.Contractor.ContractorEmployee.ContractorEmployeeId,
                     visible: Program.Settings.InstallerOptions.AllowSelectionExistingContact">
                 </select>
-                <input type="text" id="tbContactName" class="ui-widget ui-widget-content ui-autocomplete-input ui-combobox-input ui-corner-all" data-bind="
+                <!-- <input type="text" id="tbContactName" class="ui-widget ui-widget-content ui-autocomplete-input ui-combobox-input ui-corner-all" data-bind="
                     value: Response.Contractor.ContractorEmployee.LastName,
-                    visible: !Program.Settings.InstallerOptions.AllowSelectionExistingContact" />
+                    visible: !Program.Settings.InstallerOptions.AllowSelectionExistingContact" /> -->
             </span>
             <span id="sbContactIdError" class="Error" data-bind="visible: !Response.Contractor.ContractorEmployee.ContractorEmployeeId.IsValid()">
-                <span class="tooltip">
-                    <span class="ErrorIcon" />
+                <span class="warning">
+                    <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: Response.Contractor.ContractorEmployee.ContractorEmployeeId.ValidationMessages">
                         <span data-bind="text: $data" /><br />
                     </span>
                 </span>
             </span>
             <span id="sbContactNameError" class="Error" data-bind="visible: !Response.Contractor.ContractorEmployee.LastName.IsValid()">
-                <span class="tooltip">
-                    <span class="ErrorIcon" />
+                <span class="warning">
+                    <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: Response.Contractor.ContractorEmployee.LastName.ValidationMessages">
                         <span data-bind="text: $data" /><br />
                     </span>
@@ -147,8 +153,8 @@
                 <input type="text" class="form-control" id="tbContactPhone" data-bind="enable: Program.Settings.InstallerOptions.AllowManualEntry, value: Response.Contractor.ContractorEmployee.Phone" />
             </span>
             <span class="Error" data-bind="visible: !Response.Contractor.ContractorEmployee.Phone.IsValid()">
-                <span class="tooltip">
-                    <span class="ErrorIcon" />
+                <span class="warning">
+                    <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: Response.Contractor.ContractorEmployee.Phone.ValidationMessages">
                         <span data-bind="text: $data" /><br />
                     </span>
@@ -202,24 +208,25 @@
                 <input type="text" class="form-control" id="tbLicenseNumber" data-bind="enable: $root.Program.Settings.InstallerOptions.AllowManualEntry, value: LicenseNumber" />
             </span>
             <div class="Error" data-bind="visible: LicenseNumber.IsValid != null && !LicenseNumber.IsValid()">
-                <span class="tooltip">
-                    <span class="ErrorIcon" />
+                <span class="warning">
+                    <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: LicenseNumber.ValidationMessages">
                         <span data-bind="text: $data" /><br />
                     </span>
                 </span>
             </div>
         </li>
-        <li class="form-gorup">
+        <li class="form-group">
             <label for="tbExpirationDate" class="col-sm-4 control-label">
                 Expiration Date:
             </label>
             <span class="col-sm-8">
-                <input type="text" class="form-control" id="tbExpirationDate" data-bind="jqDatePicker: { value: TerminationDate }, enable: $root.Program.Settings.InstallerOptions.AllowManualEntry, value: TerminationDate" />
+                <input type="text" class="form-control data_datepicker" /> 
+                <!-- <input type="text" class="form-control" id="tbExpirationDate" data-bind="jqDatePicker: { value: TerminationDate }, enable: $root.Program.Settings.InstallerOptions.AllowManualEntry, value: TerminationDate" /> -->
             </span>
             <div class="Error" data-bind="visible: TerminationDate.IsValid != null && !TerminationDate.IsValid()">
-                <span class="tooltip">
-                    <span class="ErrorIcon" />
+                <span class="warning">
+                    <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: TerminationDate.ValidationMessages">
                         <span data-bind="text: $data" /><br />
                     </span>
@@ -259,8 +266,8 @@
                 <input type="text" class="form-control" id="tbPOBox" data-bind="enable: Program.Settings.InstallerOptions.AllowManualEntry, value: Response.Contractor.ContractorAddress.POBox" />
             </span>
             <div class="Error" data-bind="visible: !Response.Contractor.ContractorAddress.POBox.IsValid()">
-                <span class="tooltip">
-                    <span class="ErrorIcon" />
+                <span class="warning">
+                    <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: Response.Contractor.ContractorAddress.POBox.ValidationMessages">
                         <span data-bind="text: $data" /><br />
                     </span>
@@ -275,8 +282,8 @@
                 <input type="text" class="form-control" id="tbStreet" data-bind="enable: Program.Settings.InstallerOptions.AllowManualEntry, value: Response.Contractor.ContractorAddress.Street1" />
             </span>
             <div class="Error" data-bind="visible: !Response.Contractor.ContractorAddress.Street1.IsValid()">
-                <span class="tooltip">
-                    <span class="ErrorIcon" />
+                <span class="warning">
+                    <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: Response.Contractor.ContractorAddress.Street1.ValidationMessages">
                         <span data-bind="text: $data" /><br />
                     </span>
@@ -299,8 +306,8 @@
                 <input type="text" class="form-control" id="tbZIP"data-bind="enable: Program.Settings.InstallerOptions.AllowManualEntry, value: Response.Contractor.ContractorAddress.PostalCode" />
             </span>
             <div class="Error" data-bind="visible: !Response.Contractor.ContractorAddress.PostalCode.IsValid()">
-                <span class="tooltip">
-                    <span class="ErrorIcon" />
+                <span class="warning">
+                    <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: Response.Contractor.ContractorAddress.PostalCode.ValidationMessages">
                         <span data-bind="text: $data" /><br />
                     </span>
@@ -315,8 +322,8 @@
                 <input type="text" class="form-control" tabindex="-1" id="tbCity" data-bind="enable: Program.Settings.InstallerOptions.AllowManualEntry, value: Response.Contractor.ContractorAddress.City" />
             </span>
             <div class="Error" data-bind="visible: !Response.Contractor.ContractorAddress.City.IsValid()">
-                <span class="tooltip">
-                    <span class="ErrorIcon" />
+                <span class="warning">
+                    <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: Response.Contractor.ContractorAddress.City.ValidationMessages">
                         <span data-bind="text: $data" /><br />
                     </span>
@@ -331,8 +338,8 @@
                 <input type="text" class="form-control" tabindex="-1" id="tbState" data-bind="enable: Program.Settings.InstallerOptions.AllowManualEntry, value: Response.Contractor.ContractorAddress.State" />
             </span>
             <div class="Error" data-bind="visible: !Response.Contractor.ContractorAddress.State.IsValid()">
-                <span class="tooltip">
-                    <span class="ErrorIcon" />
+                <span class="warning">
+                    <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: Response.Contractor.ContractorAddress.State.ValidationMessages">
                         <span data-bind="text: $data" /><br />
                     </span>

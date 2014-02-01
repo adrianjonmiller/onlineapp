@@ -21,8 +21,8 @@
             I Agree to the Terms and Conditions of this program.
         </label>
         <span class="Error" data-bind="visible: !Response.Enrollment.AgreedToTerms.IsValid()">
-            <span class="tooltip">
-                <span class="ErrorIcon" />
+            <span class="warning">
+                <span class="ion ion-alert-circled orange" />
                 <span class="TooltipText" data-bind="foreach: Response.Enrollment.AgreedToTerms.ValidationMessages">
                     <span data-bind="text: $data" /><br />
                 </span>
