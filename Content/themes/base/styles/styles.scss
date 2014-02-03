@@ -91,3 +91,270 @@ div.ReviewList {
 			display: block;
 		}
 }
+
+.Panel {
+	position: relative;
+
+	&:before {
+		content: "";
+		border-top: solid thin lightgray;
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+	}
+}
+
+
+@media all {
+    .page-break {
+        display: none;
+    }
+
+    div.Print {
+        width: 800px;
+        background-color: white;
+    }
+}
+
+@media print {
+    .page-break {
+        display: block;
+        page-break-before: always;
+    }
+
+    div.Print {
+        width: 100%;
+        background-color: white;
+    }
+}
+
+    div.Print .Bold {
+        font-weight: bold;
+    }
+
+    div.Print .Center {
+        text-align: center;
+    }
+
+    div.Print .Right {
+        text-align: right;
+    }
+
+    div.Print div.Header {
+        display: block;
+        top: 0;
+        width: 100%;
+        margin-bottom: 1em;
+    }
+
+    div.Print div.ConfirmationAndDate {
+        border-top-style: solid;
+        width: 100%;
+    }
+
+        div.Print div.ConfirmationAndDate span.Date {
+            float: right;
+        }
+
+    div.Print div.PageTitle {
+        border-style: solid;
+        background-color: lightgray;
+        margin-top: 4px;
+        font-weight: bold;
+        font-size: large;
+    }
+
+    div.Print div.Section {
+        border-left-style: solid;
+        border-right-style: solid;
+        border-bottom-style: solid;
+    }
+
+        div.Print div.Section div.SectionLine {
+            width: 100%;
+            display: table;
+            border-spacing: 4px 2px;
+        }
+
+        div.Print div.Section span.Box {
+            border-style: solid;
+            height: 19px;
+        }
+
+        div.Print div.Section span.Field100 {
+            display: table-cell;
+            width: 100%;
+        }
+
+        div.Print div.Section span.Field75 {
+            display: table-cell;
+            width: 75%;
+        }
+
+        div.Print div.Section span.Field60 {
+            display: table-cell;
+            width: 60%;
+        }
+
+        div.Print div.Section span.Field50 {
+            display: table-cell;
+            width: 50%;
+        }
+
+        div.Print div.Section span.Field40 {
+            display: table-cell;
+            width: 40%;
+        }
+
+        div.Print div.Section span.Field33 {
+            display: table-cell;
+            width: 33%;
+        }
+
+        div.Print div.Section span.Field30 {
+            display: table-cell;
+            width: 30%;
+        }
+
+        div.Print div.Section span.Field25 {
+            display: table-cell;
+            width: 25%;
+        }
+
+        div.Print div.Section span.Field20 {
+            display: table-cell;
+            width: 20%;
+        }
+
+        div.Print div.Section span.Field16 {
+            display: table-cell;
+            width: 16%;
+        }
+
+        div.Print div.Section span.Field15 {
+            display: table-cell;
+            width: 15%;
+        }
+
+        div.Print div.Section span.Field10 {
+            display: table-cell;
+            width: 10%;
+        }
+
+        div.Print div.Section span.Field5 {
+            display: table-cell;
+            width: 5%;
+        }
+
+        div.Print div.Section span.Field4 {
+            display: table-cell;
+            width: 4%;
+        }
+
+        div.Print div.Section div.Terms {
+            display: table;
+            width: 100%;
+        }
+
+        div.Print div.Section div.Agree {
+            display: table;
+            width: 100%;
+            text-align: center;
+            font-size: large;
+        }
+
+        div.Print div.Section span.MailingAddress {
+            display: block;
+        }
+
+    div.Print div.Equipment {
+        border-left-style: solid;
+        border-right-style: solid;
+        border-bottom-style: solid;
+        padding: 4px;
+    }
+
+        div.Print div.Equipment div.Item {
+            display: table-cell;
+            width: 60%;
+            border-style: solid;
+            border-right: none;
+        }
+
+        div.Print div.Equipment div.Quantity {
+            display: table-cell;
+            width: 20%;
+            border-style: solid;
+        }
+
+        div.Print div.Equipment div.Total {
+            display: table-cell;
+            width: 20%;
+            border-style: solid;
+            border-left: none;
+        }
+
+        div.Print div.Equipment div.EquipmentTitleLine {
+            width: 100%;
+            display: table;
+            font-weight: bold;
+            margin-bottom: 4px;
+            background-color: lightgray;
+            font-size: large;
+        }
+
+        div.Print div.Equipment div.EquipmentLine {
+            width: 100%;
+            display: table;
+            page-break-inside: avoid;
+        }
+
+        div.Print div.Equipment div.EquipmentLine div.EquipmentProperty {
+            width: 100%;
+            display: table;
+            border-spacing: 4px;
+            page-break-after:avoid;
+            page-break-before:avoid;
+        }
+
+        div.Print div.Equipment div.EquipmentLine div.EquipmentProperty span.EquipmentPropertyName {
+            width: 25%;
+            height: 25px;
+            display: table-cell;
+            text-align: right;
+        }
+
+        div.Print div.Equipment div.EquipmentLine div.EquipmentProperty span.EquipmentPropertyValue {
+            width: 75%;
+            height: 19px;
+            display: table-cell;
+            border-style: solid;
+        }
+
+        div.Print div.Equipment div.EquipmentLine span.EquipmentName {
+            font-weight: bold;
+            display: block;
+            page-break-after:avoid;
+            page-break-before:avoid;
+        }
+
+        div.Print div.Equipment div.EquipmentLine span.EquipmentDescription {
+            display: block;
+            page-break-after:avoid;
+            page-break-before:avoid;
+        }
+
+        div.Print div.Equipment div.EquipmentLine * { 
+            page-break-after:avoid;
+            page-break-before:avoid;
+        }
+
+        div.Print div.Equipment div.MinusBottom {
+            border-bottom-style: none;
+        }
+
+        div.Print div.Equipment div.EquipmentBottomLine {
+            width: 100%;
+            display: table;
+        }
