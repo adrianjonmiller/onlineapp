@@ -93,7 +93,7 @@
                             <input type="number" class="form-control" data-bind="value: PlannedMeasureQty"  />
                         </span>
                         <div class="Error" data-bind="visible: !PlannedMeasureQty.IsValid()">
-                            <span class="warning col-md-offset-4">
+                            <span class="warning">
                                 <span class="ion ion-alert-circled orange" />
                                 <span class="TooltipText" data-bind="foreach: PlannedMeasureQty.ValidationMessages">
                                     <span data-bind="text: $data" /><br />

@@ -16,7 +16,7 @@
                 Where did you originally hear about this program?
             </label>
             <span class="Error" data-bind="visible: !Response.Enrollment.LeadSourceId.IsValid()">
-                <span >
+                <span class="warning">
                     <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: Response.Enrollment.LeadSourceId.ValidationMessages">
                         <span data-bind="text: $data" /><br />

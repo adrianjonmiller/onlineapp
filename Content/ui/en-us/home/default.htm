@@ -13,7 +13,7 @@
     <div class="form-group">
         <span>Indicate who is completing this application:</span>
         <div class="Error" data-bind="visible: !Response.Enrollment.EnrollmentWhoIsApplyingId.IsValid()">
-            <span >
+            <span class="warning">
                 <span class="ion ion-alert-circled orange" />
                 <span class="TooltipText" data-bind="foreach: Response.Enrollment.EnrollmentWhoIsApplyingId.ValidationMessages">
                     <span data-bind="text: $data" /><br />
@@ -36,7 +36,7 @@
       </div>
       <div class="Error" data-bind="visible: true">
         <!-- Response.Enrollment.ServiceAccountNo.IsValid() == false -->
-        <span >
+        <span class="warning">
           <span class="ion ion-alert-circled orange"></span>
           <span class="TooltipText" data-bind="foreach: Response.Enrollment.ServiceAccountNo.ValidationMessages"></span>
           <span data-bind="text: $data" ></span><br />
@@ -49,7 +49,7 @@
           <li data-bind="attr: { 'data-question': Label }">
               <label data-bind="text: Label">Testing?</label>
               <div class="Error" data-bind="visible: !AnswerIsValid()">
-                  <span >
+                  <span class="warning">
                       <span class="ion ion-alert-circled orange" />
                       <span class="TooltipText">
                           <span data-bind="text: InvalidMessage()" /><br />

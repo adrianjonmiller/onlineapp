@@ -1,6 +1,12 @@
 $pad: 18px;
 $orange: orange;
 
+%clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
 body {
 	background-color: #fafafa;
 }
@@ -23,9 +29,6 @@ body {
 	}
 }
 
-.warning {
-	padding-left: 1em;
-}
 .orange { color: $orange; }
 
 span.ReviewLine {
@@ -46,4 +49,45 @@ span.ReviewInsideHeaderLine {
 
 div.ReviewList {
     margin-bottom: 20px;
+}
+
+.Error {
+	width: 100%;
+	position: relative;
+	float: left;
+
+	@extend %clearfix;
+
+	.warning {
+		position: absolute;
+		top: -28px;
+		left: -13px;
+
+		.TooltipText {
+			background-color: rgba(black, 0.7);
+			color: #fff;
+			padding: 4px 8px;
+			display: block;
+			border-radius: 4px;
+			position: absolute;
+			top: -3px;
+			left: 20px;
+			display: none;
+			> span {
+				white-space: nowrap;
+			}
+			&:after {
+				content: "";
+				border: solid 8px transparent;
+				border-right-color: rgba(black, 0.7);
+				position: absolute;
+				left: -16px;
+				top: 6px;
+			}
+		}
+
+	}
+	&:hover .TooltipText{
+			display: block;
+		}
 }

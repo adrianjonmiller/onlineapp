@@ -81,7 +81,7 @@
                             ko.cleanNode($("section#content")[0]);
                             ko.applyBindings(AppState().Application.Model, $("section#content")[0]);
                         } catch (ex) {
-                            console.error("Failed to refresh bindings: " + ex.toString());
+                            console.Error("Failed to refresh bindings: " + ex.toString());
                         }
                     }
                 };

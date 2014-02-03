@@ -129,7 +129,7 @@ $(document).ready(function() {
                     visible: !Program.Settings.InstallerOptions.AllowSelectionExistingContact" /> -->
             </span>
             <span id="sbContactIdError" class="Error" data-bind="visible: !Response.Contractor.ContractorEmployee.ContractorEmployeeId.IsValid()">
-                <span class="warning">
+                <span class="warning col-md-offset-4">
                     <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: Response.Contractor.ContractorEmployee.ContractorEmployeeId.ValidationMessages">
                         <span data-bind="text: $data" /><br />
@@ -137,7 +137,7 @@ $(document).ready(function() {
                 </span>
             </span>
             <span id="sbContactNameError" class="Error" data-bind="visible: !Response.Contractor.ContractorEmployee.LastName.IsValid()">
-                <span class="warning">
+                <span class="warning col-md-offset-4">
                     <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: Response.Contractor.ContractorEmployee.LastName.ValidationMessages">
                         <span data-bind="text: $data" /><br />
@@ -153,7 +153,7 @@ $(document).ready(function() {
                 <input type="text" class="form-control" id="tbContactPhone" data-bind="enable: Program.Settings.InstallerOptions.AllowManualEntry, value: Response.Contractor.ContractorEmployee.Phone" />
             </span>
             <span class="Error" data-bind="visible: !Response.Contractor.ContractorEmployee.Phone.IsValid()">
-                <span class="warning">
+                <span class="warning col-md-offset-4">
                     <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: Response.Contractor.ContractorEmployee.Phone.ValidationMessages">
                         <span data-bind="text: $data" /><br />
@@ -208,7 +208,7 @@ $(document).ready(function() {
                 <input type="text" class="form-control" id="tbLicenseNumber" data-bind="enable: $root.Program.Settings.InstallerOptions.AllowManualEntry, value: LicenseNumber" />
             </span>
             <div class="Error" data-bind="visible: LicenseNumber.IsValid != null && !LicenseNumber.IsValid()">
-                <span class="warning">
+                <span class="warning col-md-offset-4">
                     <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: LicenseNumber.ValidationMessages">
                         <span data-bind="text: $data" /><br />
@@ -225,7 +225,7 @@ $(document).ready(function() {
                 <!-- <input type="text" class="form-control" id="tbExpirationDate" data-bind="jqDatePicker: { value: TerminationDate }, enable: $root.Program.Settings.InstallerOptions.AllowManualEntry, value: TerminationDate" /> -->
             </span>
             <div class="Error" data-bind="visible: TerminationDate.IsValid != null && !TerminationDate.IsValid()">
-                <span class="warning">
+                <span class="warning col-md-offset-4">
                     <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: TerminationDate.ValidationMessages">
                         <span data-bind="text: $data" /><br />
@@ -266,7 +266,7 @@ $(document).ready(function() {
                 <input type="text" class="form-control" id="tbPOBox" data-bind="enable: Program.Settings.InstallerOptions.AllowManualEntry, value: Response.Contractor.ContractorAddress.POBox" />
             </span>
             <div class="Error" data-bind="visible: !Response.Contractor.ContractorAddress.POBox.IsValid()">
-                <span class="warning">
+                <span class="warning col-md-offset-4">
                     <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: Response.Contractor.ContractorAddress.POBox.ValidationMessages">
                         <span data-bind="text: $data" /><br />
@@ -282,7 +282,7 @@ $(document).ready(function() {
                 <input type="text" class="form-control" id="tbStreet" data-bind="enable: Program.Settings.InstallerOptions.AllowManualEntry, value: Response.Contractor.ContractorAddress.Street1" />
             </span>
             <div class="Error" data-bind="visible: !Response.Contractor.ContractorAddress.Street1.IsValid()">
-                <span class="warning">
+                <span class="warning col-md-offset-4">
                     <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: Response.Contractor.ContractorAddress.Street1.ValidationMessages">
                         <span data-bind="text: $data" /><br />
@@ -306,7 +306,7 @@ $(document).ready(function() {
                 <input type="text" class="form-control" id="tbZIP"data-bind="enable: Program.Settings.InstallerOptions.AllowManualEntry, value: Response.Contractor.ContractorAddress.PostalCode" />
             </span>
             <div class="Error" data-bind="visible: !Response.Contractor.ContractorAddress.PostalCode.IsValid()">
-                <span class="warning">
+                <span class="warning col-md-offset-4">
                     <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: Response.Contractor.ContractorAddress.PostalCode.ValidationMessages">
                         <span data-bind="text: $data" /><br />
@@ -322,7 +322,7 @@ $(document).ready(function() {
                 <input type="text" class="form-control" tabindex="-1" id="tbCity" data-bind="enable: Program.Settings.InstallerOptions.AllowManualEntry, value: Response.Contractor.ContractorAddress.City" />
             </span>
             <div class="Error" data-bind="visible: !Response.Contractor.ContractorAddress.City.IsValid()">
-                <span class="warning">
+                <span class="warning col-md-offset-4">
                     <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: Response.Contractor.ContractorAddress.City.ValidationMessages">
                         <span data-bind="text: $data" /><br />
@@ -338,7 +338,7 @@ $(document).ready(function() {
                 <input type="text" class="form-control" tabindex="-1" id="tbState" data-bind="enable: Program.Settings.InstallerOptions.AllowManualEntry, value: Response.Contractor.ContractorAddress.State" />
             </span>
             <div class="Error" data-bind="visible: !Response.Contractor.ContractorAddress.State.IsValid()">
-                <span class="warning">
+                <span class="warning col-md-offset-4">
                     <span class="ion ion-alert-circled orange" />
                     <span class="TooltipText" data-bind="foreach: Response.Contractor.ContractorAddress.State.ValidationMessages">
                         <span data-bind="text: $data" /><br />
