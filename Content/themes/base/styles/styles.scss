@@ -61,7 +61,7 @@ div.ReviewList {
 	.warning {
 		position: absolute;
 		top: -28px;
-		left: -13px;
+		right: 0;
 
 		.TooltipText {
 			background-color: rgba(black, 0.7);
@@ -71,7 +71,7 @@ div.ReviewList {
 			border-radius: 4px;
 			position: absolute;
 			top: -3px;
-			left: 20px;
+			right: 20px;
 			display: none;
 			> span {
 				white-space: nowrap;
@@ -79,9 +79,9 @@ div.ReviewList {
 			&:after {
 				content: "";
 				border: solid 8px transparent;
-				border-right-color: rgba(black, 0.7);
+				border-left-color: rgba(black, 0.7);
 				position: absolute;
-				left: -16px;
+				right: -16px;
 				top: 6px;
 			}
 		}

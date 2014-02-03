@@ -64,7 +64,7 @@
                     <input type="text" class="form-control data_datepicker" id="tbInstallationDate" data-bind="value: Response.Enrollment.InstallationDate" />
                 </span>
                 <div class="Error" data-bind="visible: !Response.Enrollment.InstallationDate.IsValid()">
-                    <span class="warning col-md-offset-4">
+                    <span class="warning">
                         <span class="ion ion-alert-circled orange" />
                         <span class="TooltipText" data-bind="foreach: Response.Enrollment.InstallationDate.ValidationMessages">
                             <span data-bind="text: $data" /><br />
